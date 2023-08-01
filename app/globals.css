@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+.bookCard img {
+    height: 135px;
+    width: 100px;
+}
