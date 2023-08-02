@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { getBooksBySearchTerm } from "../api/route";
+import {Html5QrcodeScanner} from "html5-qrcode";
 
 const Search = ({ setBooks }) => {
   const [search, setSearch] = useState("");
@@ -20,6 +21,30 @@ const Search = ({ setBooks }) => {
       console.log(error);
     }
   };
+  const bookScanner = () => {
+    function onScanSuccess(decodedText, decodedResult) {
+      // handle the scanned code as you like, for example:
+      if(decodedText.length === 10 || decodedText.length === 13){
+        console.log(decodedText)
+        getBooksBySearchTerm(decodedText,"ISBN").then((data)=>{
+          setBooks(data)
+        })
+      }
+    }
+    function onScanFailure(error) {
+      // handle scan failure, usually better to ignore and keep scanning.
+      // for example:
+      console.warn(`Code scan error = ${error}`);
+    }
+    const scanner =  new Html5QrcodeScanner("reader", {
+      qrbox: {
+        width: 250,
+        height: 250
+      },
+      fps: 10,
+    })
+    return scanner.render(onScanSuccess, onScanFailure);
+  }
 
   console.log(criteria)
   return (
@@ -37,6 +62,7 @@ const Search = ({ setBooks }) => {
         <button className="bg-blue-500 p-2 rounded text-white">Search</button>
       
       </form>
+      <button className="bg-blue-500 p-2 rounded text-white" onClick={bookScanner}>Camera</button>
       <div className="flex flex-row gap-4 mt-4 justify-center items-center">
         <p>Search by :</p>
         <div className="flex gap-4">
@@ -45,6 +71,10 @@ const Search = ({ setBooks }) => {
           <button className="bg-gray-200 p-2 rounded-full text-sm font-bold" onClick={() => setCriteria("ISBN")}>ISBN</button>
         </div>
       </div>
+      <div id="reader">
+            </div>
+        <div id="result">
+            </div>
     </div>
   );
 };
