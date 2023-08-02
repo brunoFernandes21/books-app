@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 import { getBooksBySearchTerm } from "../api/route";
-import {Html5QrcodeScanner} from "html5-qrcode";
+import { Html5QrcodeScanner } from "html5-qrcode";
 
 const Search = ({ setBooks }) => {
   const [search, setSearch] = useState("");
   const [criteria, setCriteria] = useState("intitle")
 
   const handleChange = (event) => {
-    setSearch(event.target.value) 
+    setSearch(event.target.value)
   }
 
   const handleSubmit = async (event) => {
@@ -24,10 +24,14 @@ const Search = ({ setBooks }) => {
   const bookScanner = () => {
     function onScanSuccess(decodedText, decodedResult) {
       // handle the scanned code as you like, for example:
-      if(decodedText.length === 10 || decodedText.length === 13){
+      if (decodedText.length === 10 || decodedText.length === 13) {
         console.log(decodedText)
-        getBooksBySearchTerm(decodedText,"ISBN").then((data)=>{
+        getBooksBySearchTerm(decodedText, "ISBN").then((data) => {
           setBooks(data)
+          scanner.clear()
+          document.getElementById("reader").remove()
+        }).catch((err) => {
+          console.log(err)
         })
       }
     }
@@ -36,7 +40,7 @@ const Search = ({ setBooks }) => {
       // for example:
       console.warn(`Code scan error = ${error}`);
     }
-    const scanner =  new Html5QrcodeScanner("reader", {
+    const scanner = new Html5QrcodeScanner("reader", {
       qrbox: {
         width: 250,
         height: 250
@@ -55,12 +59,12 @@ const Search = ({ setBooks }) => {
           type="text"
           id="search"
           name="search"
-          placeholder={`Enter a real book's ${criteria == "ISBN" ? criteria : criteria.slice(2) }`}
+          placeholder={`Enter a real book's ${criteria == "ISBN" ? criteria : criteria.slice(2)}`}
           value={search}
           onChange={handleChange}
         />
         <button className="bg-blue-500 p-2 rounded text-white">Search</button>
-      
+
       </form>
       <button className="bg-blue-500 p-2 rounded text-white" onClick={bookScanner}>Camera</button>
       <div className="flex flex-row gap-4 mt-4 justify-center items-center">
@@ -72,9 +76,9 @@ const Search = ({ setBooks }) => {
         </div>
       </div>
       <div id="reader">
-            </div>
-        <div id="result">
-            </div>
+      </div>
+      <div id="result">
+      </div>
     </div>
   );
 };
