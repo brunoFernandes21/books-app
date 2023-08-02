@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import app from "../firebase/config";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { UserContext } from '../context/User';
 
 const auth = getAuth(app);
 
@@ -11,8 +12,13 @@ const LoginPage = () => {
     const [isError, setIsError] = useState(null);
     const [loginData, setLoginData] = useState({
         email: "",
-        password: "",
+        password: ""
     });
+    const {user, setUser} = useContext(UserContext)
+
+    // const storeUser = ({userID}) => {
+    //     localStorage.setItem('user', userID)
+    //   }
 
     const handleChange = (event) => {
         setLoginData((previousData) => {
@@ -27,8 +33,11 @@ const LoginPage = () => {
         setIsError(null);
         try {
             const response = await signInWithEmailAndPassword(auth, loginData.email, loginData.password);
-            console.log(response);
-            router.push("/");
+            const userID = response.user.reloadUserInfo.localId
+            localStorage.setItem('user', userID)
+            console.log(userID)
+            setUser(localStorage.getItem("user"))
+            router.push("/profile");
         } catch (error) {
             setIsError(error.message);
         }

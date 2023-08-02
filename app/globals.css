@@ -46,3 +46,26 @@ h2 {
 .input-wrapper label {
     margin-right: 5px;
 }
+
+.single-book-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-items: center;
+}
+
+.single-book-container {
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+}
+
+h3 {
+    size: 2em;
+    font-weight: 600;
+}

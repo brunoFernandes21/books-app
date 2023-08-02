@@ -28,14 +28,17 @@ const RegisterPage = () => {
 
     let router = useRouter();
 
-    const sendData = async () => {
+    const sendData = async (userID) => {
         try {
             const response = await addDoc(collection(db, "userData"), {
+                userID: userID,
                 fullName: formData.fullName,
-                email: formData.email,
-                password: formData.password,
+                favourites: [],
+                savedBooks: [],
+                readBooks: [],
+                currentlyReading: []
             });
-            console.log("Document written with ID: ", response.id);
+            console.log("Response from send data function >>", response);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -49,7 +52,9 @@ const RegisterPage = () => {
         if (formData.password === formData.confirmPassword) {
             try {
                 const response = await createUserWithEmailAndPassword(auth, email, password);
-                sendData();
+                console.log("user ID >>", response.user.reloadUserInfo.localId)
+                const userID = response.user.reloadUserInfo.localId
+                sendData(userID);
                 router.push("/");
             } catch (error) {
                 console.log(error);
