@@ -2,6 +2,8 @@
 import { BookCard } from "./BookCard";
 
 const BookSearchResult = ({ books }) => {
+
+      if(books) {
       return (
           <div className="book-title flex justify-center flex-col items-center bg-white p-2">
           <h3>Search Results</h3>
@@ -11,7 +13,7 @@ const BookSearchResult = ({ books }) => {
             })}
           </div>}
         </div>
-      );
+      );}
 }
 
 export default BookSearchResult

@@ -4,7 +4,7 @@ import { getBooksBySearchTerm } from "../api/route";
 
 const Search = ({ setBooks }) => {
   const [search, setSearch] = useState("");
-  const [criteria, setCriteria] = useState("title")
+  const [criteria, setCriteria] = useState("intitle")
 
   const handleChange = (event) => {
     setSearch(event.target.value) 
@@ -25,20 +25,20 @@ const Search = ({ setBooks }) => {
   return (
     <div className=" flex justify-center items-center flex-col">
       <form onSubmit={handleSubmit} className="border border-yellow-500">
-        <label htmlFor="search">Search</label>
+        <label htmlFor="search">Search {criteria == "ISBN" ? criteria : criteria.slice(2)}</label>
         <input
           type="text"
           id="search"
           name="search"
-          placeholder="Enter a real book's title..."
+          placeholder={`Enter a real book's ${criteria == "ISBN" ? criteria : criteria.slice(2) }`}
           value={search}
           onChange={handleChange}
         />
         <button className="bg-blue-500 p-2 rounded text-white">Search</button>
-        <button className="bg-blue-500 p-2 rounded text-white">Camera</button>
+      
       </form>
       <div className="flex flex-row gap-4 mt-4 justify-center items-center">
-        <p>Search by:</p>
+        <p>Search by :</p>
         <div className="flex gap-4">
           <button className="bg-gray-200 p-2 rounded-full text-sm font-bold" onClick={() => setCriteria("intitle")}>Title</button>
           <button className="bg-gray-200 p-2 rounded-full text-sm font-bold" onClick={() => setCriteria("inauthor")}>Author</button>
