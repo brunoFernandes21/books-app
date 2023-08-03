@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.bookCard img {
+    height: 250px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid white
+}
 /* LOGIN and REGISTER FORMS */
 
 .form-container {
