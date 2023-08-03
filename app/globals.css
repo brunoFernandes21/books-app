@@ -10,6 +10,9 @@
 }
 /* LOGIN and REGISTER FORMS */
 
+.active {
+    display: block;
+}
 .form-container {
     display: flex;
     flex-direction: column;
