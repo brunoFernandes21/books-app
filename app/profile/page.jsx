@@ -1,18 +1,25 @@
 "use client";
-import React, { useContext } from "react";
-
-import { UserContext } from "../context/User";
-
+import {useContext} from 'react'
+import {AuthContext} from "@/app/context/AuthContext"
+import { onAuthStateChanged } from 'firebase/auth'
+import {auth} from "@/app/firebase/config"
+import { useEffect } from 'react';
 function Profile() {
-    const { user, setUser } = useContext(UserContext);
+  const {user, setUser} = useContext(AuthContext)
 
-    // console.log("user from CONTEXT: ", user);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user)
+     })
+   }, [])
 
-    return (
-        <div className="profile-page">
-            <h2 className="profile-welcome">Welcome, {user.fullName}!</h2>
-        </div>
-    );
+    if(user) {
+      return (
+        <p>Hello {user.displayName} </p>
+        //ADD FOR WITH USER EMAIL/NAME/PASSWORD AND TBN
+      );
+    }
+  
 }
 
 export default Profile;

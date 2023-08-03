@@ -1,16 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Featured } from "./components/Featured";
 import LandingPage from "./components/LandingPage";
 import Search from "./components/Search";
 import BookSearchResult from "./components/BookSearchResult";
+import { onAuthStateChanged } from 'firebase/auth'
+import {auth} from "@/app/firebase/config"
+import {useContext} from 'react'
+import {AuthContext} from "@/app/context/AuthContext"
 
 export default function Home() {
   const [books, setBooks] = useState([]);
-  const [user, setUser] = useState("Jav")
-  const [loading, setLoading] = useState(true)
-
-  if (user) {
+  const {user, setUser, loading, setLoading, } = useContext(AuthContext)
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user)
+       setLoading(false)
+     })
+   }, [])
+   
+   if (user) {
     return (
       <main>
         <Search setBooks={setBooks} />
@@ -28,6 +37,7 @@ export default function Home() {
           <Featured />
         </section>
       </main>
+
     );
   } else {
     return (

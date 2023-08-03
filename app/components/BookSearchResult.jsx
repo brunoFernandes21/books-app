@@ -2,7 +2,7 @@
 import { BookCard } from "./BookCard";
 
 const BookSearchResult = ({ books }) => {
-
+console.log(user, "user in booksearchresult")
 if(books.length !== 0){
     return (
       <div className="book-title flex justify-center flex-col items-center p-2 ">
