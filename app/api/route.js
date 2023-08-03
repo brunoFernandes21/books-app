@@ -7,11 +7,11 @@ const myBooksApi = axios.create({
 export const getBooksBySearchTerm = async (searchTerm, criteria) => {
     const response = await myBooksApi.get(`?q=${criteria}:${searchTerm}`)
     if(response.data.items.length !== 0 ) {
-        return response.data.items
+        return response.data.items.slice(0, 4)
     }  
 }
 export const getFeaturedBooks = async () => {
     const response = await myBooksApi.get(`?q=rating`)
-    return response.data.items
+    return response.data.items.slice(0, 4)
 }
 
