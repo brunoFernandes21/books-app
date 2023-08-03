@@ -15,3 +15,7 @@ export const getFeaturedBooks = async () => {
     return response.data.items.slice(0, 4)
 }
 
+export const fetchBookById = async (id) => {
+    const response = await myBooksApi.get(`/${id}`)
+    return response.data.volumeInfo
+}

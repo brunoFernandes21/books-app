@@ -16,6 +16,7 @@ const LandingPage = () => {
       <div className="flex gap-4 mt-4">
         <Link href="/login" className="bg-blue-500 p-2 rounded text-white">Login</Link>
         <Link href="/register" className="bg-blue-500 p-2 rounded text-white"> Register</Link>
+        <Link href="/singlebook" className="bg-blue-500 p-2 rounded text-white"> Single Book Page</Link>
       </div>
     </section>
   );
