@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FeaturedBookCard } from "./FeaturedBookCard";
+import { BookCard } from "./BookCard";
 import { getFeaturedBooks } from "../api/route";
 
 export const Featured = () => {
@@ -9,8 +9,8 @@ export const Featured = () => {
   useEffect(() => {
     const getBooks = async () => {
       try {
-        const banana = await getFeaturedBooks();
-        setFeaturedBooks(banana);
+        const books = await getFeaturedBooks();
+        setFeaturedBooks(books);
       } catch (err) {
         console.log(err);
       }
@@ -20,10 +20,10 @@ export const Featured = () => {
 
     return (
         <div className="book-title flex justify-center flex-col items-center bg-white p-2">
-        <h3>Featured</h3>
+        <h3>Top 10 rated Books</h3>
         <div className="flex flex-row gap-4 ">
           {featuredBooks.map((book) => {
-            return <FeaturedBookCard book={book} key={book.id} />;
+            return <BookCard book={book} key={book.id} />;
           })}
         </div>
       </div>

@@ -8,12 +8,12 @@ import BookSearchResult from "./components/BookSearchResult";
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState("Jav")
+  const [loading, setLoading] = useState(true)
 
   if (user) {
     return (
       <main>
         <Search setBooks={setBooks} />
-
         <section className="flex justify-center mt-10 p-10 border-4 border-red-600">
           <p>Welcome to MyBooks</p>
           <p>Search for books to add to your favourites</p>
@@ -24,7 +24,6 @@ export default function Home() {
             <BookSearchResult books={books} />
           </div>
         )}
-        {/* {books.length === 0 && <p>Sorry, could not find books! Try again.</p>} */}
         <section className="mt-40">
           <Featured />
         </section>
