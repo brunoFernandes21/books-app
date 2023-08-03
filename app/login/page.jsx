@@ -1,9 +1,11 @@
 "use client";
 import { useState, useContext } from "react";
-import app from "../firebase/config";
+import { app } from "../firebase/config";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
 import { useRouter } from "next/navigation";
-import { UserContext } from '../context/User';
+import { UserContext } from "../context/User";
 
 const auth = getAuth(app);
 
@@ -12,13 +14,9 @@ const LoginPage = () => {
     const [isError, setIsError] = useState(null);
     const [loginData, setLoginData] = useState({
         email: "",
-        password: ""
+        password: "",
     });
-    const {user, setUser} = useContext(UserContext)
-
-    // const storeUser = ({userID}) => {
-    //     localStorage.setItem('user', userID)
-    //   }
+    const { user, setUser } = useContext(UserContext);
 
     const handleChange = (event) => {
         setLoginData((previousData) => {
@@ -32,11 +30,25 @@ const LoginPage = () => {
         event.preventDefault();
         setIsError(null);
         try {
-            const response = await signInWithEmailAndPassword(auth, loginData.email, loginData.password);
-            const userID = response.user.reloadUserInfo.localId
-            localStorage.setItem('user', userID)
-            console.log(userID)
-            setUser(localStorage.getItem("user"))
+            const responseFromLogin = await signInWithEmailAndPassword(auth, loginData.email, loginData.password);
+
+            const userID = responseFromLogin.user.reloadUserInfo.localId;
+
+            const docRef = doc(db, "userData", userID);
+            const responseWithSingleUser = await getDoc(docRef);
+
+            if (!responseWithSingleUser.exists()) {
+                console.error("Unable to get user details for " + userID);
+                return;
+            }
+            const singleUserData = responseWithSingleUser.data();
+            
+            console.log("singleUserData", singleUserData);
+
+            localStorage.setItem("user", JSON.stringify(singleUserData));
+
+            setUser(singleUserData);
+
             router.push("/profile");
         } catch (error) {
             setIsError(error.message);
@@ -46,7 +58,7 @@ const LoginPage = () => {
     return (
         <div className="form-container">
             <form className="form" onSubmit={handleSubmit}>
-                <h2>Please log in below.</h2>
+                <h2 className="form-title">Please log in below.</h2>
 
                 <div className="input-wrapper">
                     <label htmlFor="email">Email</label>
