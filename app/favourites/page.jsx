@@ -5,7 +5,7 @@ import { AuthContext } from "@/app/context/AuthContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { DBBookCard } from "../components/DBBookCard";
 
@@ -39,13 +39,21 @@ const FavouritesPage = () => {
   // then we'll display them in cards
   //grid or flexbox
 
-  
+  const removeBook = async (id) => {
+    // try and do with state 
+    
+    console.log("BOOK ID", id)
+    const docRef = doc(db, "userData", user.uid);    
+        const updateAction = await updateDoc(docRef, {
+            favourites: arrayRemove({bookID: id})
+        })
+  }
 
   return (
     <main>
       <h1>These are your favourite books</h1>
       {books.map((book) => {
-        return <DBBookCard key={book.bookID} book={book} />;
+        return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
       })}
     </main>
   );

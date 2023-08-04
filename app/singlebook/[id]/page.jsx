@@ -11,9 +11,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
 
-
-
-
 function SingleBookPage() {
     const [singleBook, setSingleBook] = useState({});
     const [loading, setLoading] = useState(true);
