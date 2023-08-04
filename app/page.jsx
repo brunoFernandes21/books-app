@@ -9,6 +9,7 @@ import {auth} from "@/app/firebase/config"
 import {useContext} from 'react'
 import {AuthContext} from "@/app/context/AuthContext"
 
+
 export default function Home() {
   const [books, setBooks] = useState([]);
   const {user, setUser, loading, setLoading, } = useContext(AuthContext)
