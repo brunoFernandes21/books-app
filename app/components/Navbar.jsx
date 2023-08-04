@@ -48,7 +48,7 @@ const Navbar = () => {
           <p>Hello {welcome}</p>
           <Link  href="/favourites" onClick={toggleNavbar}>Favourites</Link>
           <Link  href="/saved-for-later">Saved</Link>
-          <Link href="/#">Currently Reading</Link>
+          <Link href="/currently-reading">Currently Reading</Link>
           <Link  href="/profile">Profile</Link>
           <Link href="/" onClick={logOut}>Sign out</Link>
         </ul>
