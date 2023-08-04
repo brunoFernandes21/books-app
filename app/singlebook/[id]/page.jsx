@@ -44,15 +44,21 @@ function SingleBookPage() {
     const addToFavourites = async () => {
         const docRef = doc(db, "userData", user.uid);
         const updateAction = await updateDoc(docRef, {
-            favourites: arrayUnion(id)
+            favourites: arrayUnion(
+                {bookID: id,
+                bookInfo: singleBook}
+                )
         })
         console.log("Book added to Favourites");
+        console.log(singleBook)
     };
 
     const addToCurrentlyReading = async () => {
         const docRef = doc(db, "userData", user.uid);
         const updateAction = await updateDoc(docRef, {
-            currentlyReading: arrayUnion(id),
+            currentlyReading: arrayUnion(                
+                {bookID: id,
+                bookInfo: singleBook}),
         });
         console.log("Book added to Currently Reading");
     };
@@ -60,7 +66,9 @@ function SingleBookPage() {
     const saveForLater = async () => {
         const docRef = doc(db, "userData", user.uid);
         const updateAction = await updateDoc(docRef, {
-            savedBooks: arrayUnion(id),
+            savedBooks: arrayUnion(                
+                {bookID: id,
+                bookInfo: singleBook}),
         });
         console.log("Book added to Saved Books");
     };
@@ -68,9 +76,12 @@ function SingleBookPage() {
     const markAsRead = async () => {
         const docRef = doc(db, "userData", user.uid);
         const updateAction = await updateDoc(docRef, {
-            readBooks: arrayUnion(id),
+            readBooks: arrayUnion(               
+                {bookID: id,
+                bookInfo: singleBook}),
         });
         console.log("Book marked as read");
+        
     };
 
     //   const updatedDescription = singleBook.description.replace(/^<p> ]/g, '')
