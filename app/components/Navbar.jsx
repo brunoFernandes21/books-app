@@ -36,11 +36,6 @@ const Navbar = () => {
      })
    }, [])
 
-  
-  
-   if(user) {
-
-  
   return (
       <nav className="p-4 relative border md:flex md:justify-between md:items-center">
   
@@ -63,6 +58,5 @@ const Navbar = () => {
       </nav>
     )
   }
-}
 
 export default Navbar
