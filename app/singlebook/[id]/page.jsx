@@ -97,7 +97,7 @@ function SingleBookPage() {
                     {/* <h3>Currently logged in as: {user.fullName}</h3> */}
 
                     <div className="single-book-container">
-                        <img className="book-img" src={singleBook.imageLinks.smallThumbnail} alt="book cover" />
+                        <img className="book-img" src={singleBook.imageLinks.small} alt="book cover" />
 
                         <div className="single-book-info">
                             <h3>{singleBook.title}</h3>
