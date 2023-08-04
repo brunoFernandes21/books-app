@@ -50,7 +50,7 @@ const Navbar = () => {
           <Link  href="/#">Saved</Link>
           <Link href="/#">Currently Reading</Link>
           <Link  href="/profile">Profile</Link>
-          <Link href="/login" onClick={logOut}>Sign out</Link>
+          <Link href="/" onClick={logOut}>Sign out</Link>
         </ul>
 
       <Link className="absolute flex md:hidden right-4 top-4 bg-white p-2 rounded" href="#">
