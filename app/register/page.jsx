@@ -1,12 +1,10 @@
 "use client";
 import { useState } from "react";
-import { app } from "../firebase/config";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { setDoc, doc } from "firebase/firestore";
-import { db } from "../firebase/config";
+import { db, auth } from "../firebase/config";
 
-const auth = getAuth(app);
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -15,6 +13,7 @@ const RegisterPage = () => {
         password: "",
         confirmPassword: "",
     });
+    const [loading, setLoading] = useState(true)
 
     const handleChange = (event) => {
         setFormData((previousFormData) => {
@@ -47,21 +46,31 @@ const RegisterPage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const email = formData.email;
         const password = formData.password;
+        setLoading(true)
         if (formData.password === formData.confirmPassword) {
             try {
                 const response = await createUserWithEmailAndPassword(auth, email, password);
-                // console.log("user ID >>", response.user.reloadUserInfo.localId);
-
+                const user = response.user
                 const userID = response.user.reloadUserInfo.localId;
-
                 sendData(userID);
+                updateProfile(auth.currentUser, {
+                    displayName: formData.fullName
+                }).then(() => {
+                    console.log("Profile updated", displayName)
+                }).catch((error) => {
+                    console.log(error)
+                })
+
                 router.push("/");
+                console.log("Account created", user)
+                
+                
             } catch (error) {
                 console.log(error);
             }
+            setLoading(false)
         }
     };
 

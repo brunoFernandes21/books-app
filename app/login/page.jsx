@@ -5,7 +5,6 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useRouter } from "next/navigation";
-import { UserContext } from "../context/User";
 
 const auth = getAuth(app);
 
@@ -16,7 +15,6 @@ const LoginPage = () => {
         email: "",
         password: "",
     });
-    const { user, setUser } = useContext(UserContext);
 
     const handleChange = (event) => {
         setLoginData((previousData) => {
@@ -43,13 +41,10 @@ const LoginPage = () => {
             }
             const singleUserData = responseWithSingleUser.data();
             
-            console.log("singleUserData", singleUserData);
 
-            localStorage.setItem("user", JSON.stringify(singleUserData));
 
-            setUser(singleUserData);
 
-            router.push("/profile");
+            router.push("/");
         } catch (error) {
             setIsError(error.message);
         }
