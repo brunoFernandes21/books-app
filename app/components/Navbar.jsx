@@ -47,7 +47,7 @@ const Navbar = () => {
       <ul className={` ${showNavbar ? "active" : ""} hidden md:flex md:flex-row justify-center items-center gap-4`}>
           <p>Hello {welcome}</p>
           <Link  href="/favourites" onClick={toggleNavbar}>Favourites</Link>
-          <Link  href="/#">Saved</Link>
+          <Link  href="/saved-for-later">Saved</Link>
           <Link href="/#">Currently Reading</Link>
           <Link  href="/profile">Profile</Link>
           <Link href="/" onClick={logOut}>Sign out</Link>
