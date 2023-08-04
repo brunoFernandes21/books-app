@@ -1,5 +1,5 @@
 "use client";
-import { BookCard } from "./BookCard";
+import { BookCard } from "./APIBookCard";
 
 const BookSearchResult = ({ books }) => {
 

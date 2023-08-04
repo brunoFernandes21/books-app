@@ -19,15 +19,18 @@ export default function Home() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user)
-      if(!user) {
-        router.push('/login')
-      }else {
-        console.log("user logged in")
-      }
-     })
-   }, [])
-   
 
+    //   if(!user) {
+    //     router.push('/')
+    //   }else {
+    //     console.log("user logged in")
+    //   }
+     }
+    )
+   }
+   , [])
+   
+   if (user) {
     return (
       <main>
         <Search setBooks={setBooks} />
@@ -45,7 +48,10 @@ export default function Home() {
           <Featured />
         </section>
       </main>
-
     );
-  
+   } else {
+    return (
+      <LandingPage />
+    )
+   }
 }

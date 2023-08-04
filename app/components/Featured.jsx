@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { BookCard } from "./BookCard";
+import { BookCard } from "./APIBookCard";
 import { getFeaturedBooks } from "../api/route";
 
 export const Featured = () => {
