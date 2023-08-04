@@ -1,21 +1,31 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { BookCard } from "../components/BookCard";
 import { useContext } from "react";
 import { AuthContext } from "@/app/context/AuthContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
+import { DBBookCard } from "../components/DBBookCard";
 
 const FavouritesPage = () => {
   const { user, setUser, loading, setLoading } = useContext(AuthContext);
   let router = useRouter();
   const [books, setBooks] = useState([]);
 
+  const   getUsersFavourites = async (user) => {
+    const docRef = doc(db, "userData", user.uid);
+    const responseWithSingleUser = await getDoc(docRef);
+    const singleUserData = responseWithSingleUser.data();
+    console.log(singleUserData.favourites)
+    setBooks(singleUserData.favourites)
+  }
+  
   useEffect(() => {
-
     onAuthStateChanged(auth, (user) => {
       setUser(user);
+      getUsersFavourites(user)
       if(!user) {
         router.push('/login')
       }else {
@@ -28,11 +38,14 @@ const FavouritesPage = () => {
   //once we get all the books back, we'll set books to the books we get back
   // then we'll display them in cards
   //grid or flexbox
+
+  
+
   return (
     <main>
       <h1>These are your favourite books</h1>
       {books.map((book) => {
-        return <BookCard key={book.id} book={book} />;
+        return <DBBookCard key={book.bookID} book={book} />;
       })}
     </main>
   );

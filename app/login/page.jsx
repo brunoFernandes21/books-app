@@ -40,11 +40,8 @@ const LoginPage = () => {
                 return;
             }
             const singleUserData = responseWithSingleUser.data();
-            
-
-
-
             router.push("/");
+            
         } catch (error) {
             setIsError(error.message);
         }

@@ -36,7 +36,8 @@ const Navbar = () => {
      })
    }, [])
 
-  return (
+   if (user) {
+    return (
       <nav className="p-4 relative border md:flex md:justify-between md:items-center">
   
       <div className="text-slate-800 font-black text-3xl">
@@ -57,6 +58,8 @@ const Navbar = () => {
       </Link>
       </nav>
     )
+   }
+
   }
 
 export default Navbar

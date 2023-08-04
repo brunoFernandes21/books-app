@@ -1,6 +1,7 @@
 import Image from "next/image";
 import landingPageImage from "../../public/images/landingPageImage.png"
 import Link from "next/link";
+
 const LandingPage = () => {
   return (
     <section className=" flex justify-center items-center flex-col p-4 m-auto">

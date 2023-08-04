@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { setDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebase/config";
 
-
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
         fullName: "",
@@ -63,7 +62,7 @@ const RegisterPage = () => {
                     console.log(error)
                 })
 
-                router.push("/");
+                router.push("/login");
                 console.log("Account created", user)
                 
                 
