@@ -2,7 +2,7 @@
 import { useEffect, useState, useContext } from "react";
 import React from "react";
 import Link from "next/link";
-import { FieldValue, doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
 import { useParams } from "next/navigation";
 import { fetchBookById } from "@/app/api/route";
@@ -10,6 +10,9 @@ import { AuthContext } from "@/app/context/AuthContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
+
+
+
 
 function SingleBookPage() {
     const [singleBook, setSingleBook] = useState({});
@@ -40,17 +43,16 @@ function SingleBookPage() {
 
     const addToFavourites = async () => {
         const docRef = doc(db, "userData", user.uid);
-
-        // const updateAction = await updateDoc(docRef, {
-        //     favourites: [id],
-        // });
+        const updateAction = await updateDoc(docRef, {
+            favourites: arrayUnion(id)
+        })
         console.log("Book added to Favourites");
     };
 
     const addToCurrentlyReading = async () => {
         const docRef = doc(db, "userData", user.uid);
         const updateAction = await updateDoc(docRef, {
-            currentlyReading: [id],
+            currentlyReading: arrayUnion(id),
         });
         console.log("Book added to Currently Reading");
     };
@@ -58,7 +60,7 @@ function SingleBookPage() {
     const saveForLater = async () => {
         const docRef = doc(db, "userData", user.uid);
         const updateAction = await updateDoc(docRef, {
-            savedBooks: [id],
+            savedBooks: arrayUnion(id),
         });
         console.log("Book added to Saved Books");
     };
@@ -66,7 +68,7 @@ function SingleBookPage() {
     const markAsRead = async () => {
         const docRef = doc(db, "userData", user.uid);
         const updateAction = await updateDoc(docRef, {
-            readBooks: [id],
+            readBooks: arrayUnion(id),
         });
         console.log("Book marked as read");
     };
