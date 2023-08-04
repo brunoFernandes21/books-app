@@ -23,13 +23,13 @@ const Navbar = () => {
     setShowNavbar(!showNavbar)
   }
   return (
-      <nav className="relative border md:flex md:justify-between md:items-center">
+      <nav className="p-4 relative border md:flex md:justify-between md:items-center">
   
-      <div className="ml-4 text-slate-800 font-black text-3xl">
+      <div className="text-slate-800 font-black text-3xl">
       <Link href="/" >Books-Buzz</Link>
         </div>
 
-      <ul className={`${showNavbar ? "active" : ""} hidden md:flex justify-center items-center gap-4`}>
+      <ul className={` ${showNavbar ? "active" : ""} hidden md:flex md:flex-row justify-center items-center gap-4`}>
           <p>Hello {user.displayName}</p>
           <Link href="/#">Favourites</Link>
           <Link href="/#">Saved</Link>
@@ -38,7 +38,7 @@ const Navbar = () => {
           <Link href="/login" onClick={logOut}>Sign out</Link>
         </ul>
 
-      <Link className="absolute flex md:hidden right-4 top-2 bg-white p-2 rounded" href="#">
+      <Link className="absolute flex md:hidden right-4 top-4 bg-white p-2 rounded" href="#">
         <FaBars onClick={toggleNavbar}/>
       </Link>
       </nav>
