@@ -8,18 +8,25 @@ import { onAuthStateChanged } from 'firebase/auth'
 import {auth} from "@/app/firebase/config"
 import {useContext} from 'react'
 import {AuthContext} from "@/app/context/AuthContext"
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  let router = useRouter()
+
   const [books, setBooks] = useState([]);
   const {user, setUser, loading, setLoading, } = useContext(AuthContext)
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user)
-       setLoading(false)
+      if(!user) {
+        router.push('/login')
+      }else {
+        console.log("user logged in")
+      }
      })
    }, [])
    
-   if (user) {
+
     return (
       <main>
         <Search setBooks={setBooks} />
@@ -39,13 +46,5 @@ export default function Home() {
       </main>
 
     );
-  } else {
-    return (
-      <main>
-        <section>
-           <LandingPage/>
-        </section>
-      </main>
-    );
-  }
+  
 }
