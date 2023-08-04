@@ -47,6 +47,9 @@ function SingleBookPage() {
     // });
     // console.log("Added to Favourites");
   };
+//   const updatedDescription = singleBook.description.replace(/^<p> ]/g, '')
+// //   const updatedDescription = singleBook.description.replaceAll("<[^>]*>", "")
+//   console.log(updatedDescription)
 
   if (loading) {
     return <p>Loading...</p>;
