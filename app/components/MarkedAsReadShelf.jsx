@@ -24,10 +24,10 @@ const MarkedAsReadShelf = () => {
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
         setUser(user);
-        getUsersRead(user)
         if(!user) {
           router.push('/login')
         }else {
+          getUsersRead(user)
           console.log("user logged in")
         }
       });

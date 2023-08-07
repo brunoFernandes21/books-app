@@ -24,10 +24,10 @@ const CurrentlyReadingShelf = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-      getCurrentlyReading(user)
       if(!user) {
         router.push('/login')
       }else {
+        getCurrentlyReading(user)
         console.log("user logged in")
       }
     });

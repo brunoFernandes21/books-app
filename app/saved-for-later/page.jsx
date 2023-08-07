@@ -24,10 +24,10 @@ const SavedBooksPage = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-      getUsersSaved(user)
       if(!user) {
         router.push('/login')
       }else {
+        getUsersSaved(user)
         console.log("user logged in")
       }
     });

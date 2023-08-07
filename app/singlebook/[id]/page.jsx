@@ -14,11 +14,13 @@ import { useRouter } from "next/navigation";
 function SingleBookPage() {
     const [singleBook, setSingleBook] = useState({});
     const [loading, setLoading] = useState(true);
+    const[error , setError]= useState(false);
     const { id } = useParams();
     let router = useRouter();
     const { user, setUser } = useContext(AuthContext);
 
     useEffect(() => {
+        setError(false)
         onAuthStateChanged(auth, (user) => {
             setUser(user);
         });
@@ -32,6 +34,7 @@ function SingleBookPage() {
                 setSingleBook(data);
                 setLoading(false);
             } catch (error) {
+                setError(true)
                 console.log(error);
             }
         };
@@ -75,40 +78,47 @@ function SingleBookPage() {
         });
         
     };
-
-    if (loading) {
-        return <p>Loading...</p>;
-    } else {
-        if (user) {
-            return (
-                <article className="single-book-page">
-                    <div className="single-book-container">
-                        <img className="book-img" src={singleBook.imageLinks.small} alt="book cover" />
-
-                        <div className="single-book-info">
-                            <h3>{singleBook.title}</h3>
-                            <p>Author: {singleBook.authors}</p>
-                            <p>Description: {singleBook.description}</p>
-                            <p>Published: {singleBook.publishedDate}</p>
-
-                            <div className="button-container">
-                                <button onClick={addToFavourites}>Add to Favourites</button>
-                                <button onClick={addToCurrentlyReading}>Add to Currently Reading</button>
-                                <button onClick={saveForLater}>Save for Later</button>
-                                <button onClick={markAsRead}>Mark as Read</button>
-                            </div>
-
-                            <Link href="/profile" className="bg-blue-500 p-2 rounded text-white">
-                                Go to Profile Page
-                            </Link>
-                        </div>
-                    </div>
-                </article>
-            );
+    if(!error){
+        if (loading) {
+            return <p>Loading...</p>;
         } else {
-            router.push("/");
+            if (user) {
+                return (
+                    <article className="single-book-page">
+                        <div className="single-book-container">
+                            <img className="book-img" src={singleBook.imageLinks.small} alt="book cover" />
+    
+                            <div className="single-book-info">
+                                <h3>{singleBook.title}</h3>
+                                <p>Author: {singleBook.authors}</p>
+                                <p>Description: {singleBook.description}</p>
+                                <p>Published: {singleBook.publishedDate}</p>
+    
+                                <div className="button-container">
+                                    <button onClick={addToFavourites}>Add to Favourites</button>
+                                    <button onClick={addToCurrentlyReading}>Add to Currently Reading</button>
+                                    <button onClick={saveForLater}>Save for Later</button>
+                                    <button onClick={markAsRead}>Mark as Read</button>
+                                </div>
+    
+                                <Link href="/profile" className="bg-blue-500 p-2 rounded text-white">
+                                    Go to Profile Page
+                                </Link>
+                            </div>
+                        </div>
+                    </article>
+                );
+            } else {
+                router.push("/");
+            }
         }
     }
+    else{
+        return (
+        <p>No book found</p>
+        )
+    }
+   
 }
 
 export default SingleBookPage;

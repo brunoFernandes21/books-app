@@ -23,11 +23,11 @@ const ReadBooksPage = () => {
   
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      getUsersRead(user)
+      setUser(user)
       if(!user) {
         router.push('/login')
       }else {
+        getUsersRead(user)
         console.log("user logged in")
       }
     });

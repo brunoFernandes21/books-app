@@ -25,10 +25,10 @@ const FavouritesShelf = () => {
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
         setUser(user);
-        getUsersFavourites(user);
         if (!user) {
           router.push("/login");
         } else {
+          getUsersFavourites(user);
           console.log("user logged in");
         }
       });
