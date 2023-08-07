@@ -33,10 +33,6 @@ const FavouritesPage = () => {
     });
   }, []);
 
-  //make a call to firebase and retrieve the favourite books
-  //once we get all the books back, we'll set books to the books we get back
-  // then we'll display them in cards
-  //grid or flexbox
 
   const removeBook = async (book, id) => {
     // try and do with state
