@@ -6,6 +6,7 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 const Search = ({ setBooks }) => {
   const [search, setSearch] = useState("");
   const [criteria, setCriteria] = useState("intitle")
+  const [error, setError] = useState(null)
 
   const handleChange = (event) => {
     setSearch(event.target.value)
@@ -18,6 +19,7 @@ const Search = ({ setBooks }) => {
       setBooks(booksResult)
       setSearch("")
     } catch (error) {
+      setError(error)
       console.log(error);
     }
   };
