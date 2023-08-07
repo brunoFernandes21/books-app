@@ -19,12 +19,6 @@ export default function Home() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user)
-
-    //   if(!user) {
-    //     router.push('/')
-    //   }else {
-    //     console.log("user logged in")
-    //   }
      }
     )
    }

@@ -18,7 +18,6 @@ const Navbar = () => {
   const logOut = () => {
     signOut(auth);
     router.push("/login");
-    console.log('User signed out')
   }
   const [showNavbar, setShowNavbar] = useState(false)
   const toggleNavbar = () => {
@@ -49,7 +48,7 @@ const Navbar = () => {
           <Link  href="/favourites" onClick={toggleNavbar}>Favourites</Link>
           <Link  href="/saved-for-later">Saved</Link>
           <Link href="/currently-reading">Currently Reading</Link>
-          <Link href="/mark-as-read">Books You Have Read</Link>
+          {/* <Link href="/mark-as-read">Books You Have Read</Link> */}
           <Link  href="/profile">Profile</Link>
           <Link href="/" onClick={logOut}>Sign out</Link>
         </ul>
