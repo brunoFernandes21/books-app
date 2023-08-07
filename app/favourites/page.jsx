@@ -14,22 +14,21 @@ const FavouritesPage = () => {
   let router = useRouter();
   const [books, setBooks] = useState([]);
 
-  const   getUsersFavourites = async (user) => {
+  const getUsersFavourites = async (user) => {
     const docRef = doc(db, "userData", user.uid);
     const responseWithSingleUser = await getDoc(docRef);
     const singleUserData = responseWithSingleUser.data();
-    console.log(singleUserData.favourites)
-    setBooks(singleUserData.favourites)
-  }
-  
+    setBooks(singleUserData.favourites);
+  };
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-      getUsersFavourites(user)
-      if(!user) {
-        router.push('/login')
-      }else {
-        console.log("user logged in")
+      getUsersFavourites(user);
+      if (!user) {
+        router.push("/login");
+      } else {
+        console.log("user logged in");
       }
     });
   }, []);
@@ -39,21 +38,25 @@ const FavouritesPage = () => {
   // then we'll display them in cards
   //grid or flexbox
 
-  const removeBook = async (id) => {
-    // try and do with state 
-    
-    console.log("BOOK ID", id)
-    const docRef = doc(db, "userData", user.uid);    
-        const updateAction = await updateDoc(docRef, {
-            favourites: arrayRemove({bookID: id})
-        })
-  }
+  const removeBook = async (book, id) => {
+    // try and do with state
+    const filteredBooks = books.filter((book) => {
+      return book.bookID !== id
+    })
+    setBooks(filteredBooks)
+    const docRef = doc(db, "userData", user.uid);
+    await updateDoc(docRef, {
+      favourites: arrayRemove(book),
+    });
+  };
 
   return (
     <main>
       <h1>These are your favourite books</h1>
       {books.map((book) => {
-        return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
+        return (
+          <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
+        );
       })}
     </main>
   );

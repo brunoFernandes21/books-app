@@ -18,7 +18,6 @@ const SavedBooksPage = () => {
     const docRef = doc(db, "userData", user.uid);
     const responseWithSingleUser = await getDoc(docRef);
     const singleUserData = responseWithSingleUser.data();
-    console.log(singleUserData.savedBooks)
     setBooks(singleUserData.savedBooks)
   }
   

@@ -25,7 +25,6 @@ const Search = ({ setBooks }) => {
     function onScanSuccess(decodedText, decodedResult) {
       // handle the scanned code as you like, for example:
       if (decodedText.length === 10 || decodedText.length === 13) {
-        console.log(decodedText)
         getBooksBySearchTerm(decodedText, "ISBN").then((data) => {
           setBooks(data)
           scanner.clear()
@@ -50,7 +49,6 @@ const Search = ({ setBooks }) => {
     return scanner.render(onScanSuccess, onScanFailure);
   }
 
-  console.log(criteria)
   return (
     <div className=" flex justify-center items-center flex-col">
       <form onSubmit={handleSubmit} className="border border-yellow-500">

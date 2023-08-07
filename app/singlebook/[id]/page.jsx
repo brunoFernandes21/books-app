@@ -46,8 +46,6 @@ function SingleBookPage() {
                 bookInfo: singleBook}
                 )
         })
-        console.log("Book added to Favourites");
-        console.log(singleBook)
     };
 
     const addToCurrentlyReading = async () => {
@@ -57,7 +55,6 @@ function SingleBookPage() {
                 {bookID: id,
                 bookInfo: singleBook}),
         });
-        console.log("Book added to Currently Reading");
     };
 
     const saveForLater = async () => {
@@ -67,7 +64,6 @@ function SingleBookPage() {
                 {bookID: id,
                 bookInfo: singleBook}),
         });
-        console.log("Book added to Saved Books");
     };
 
     const markAsRead = async () => {
@@ -77,13 +73,8 @@ function SingleBookPage() {
                 {bookID: id,
                 bookInfo: singleBook}),
         });
-        console.log("Book marked as read");
         
     };
-
-    //   const updatedDescription = singleBook.description.replace(/^<p> ]/g, '')
-    // //   const updatedDescription = singleBook.description.replaceAll("<[^>]*>", "")
-    //   console.log(updatedDescription)
 
     if (loading) {
         return <p>Loading...</p>;
@@ -91,8 +82,6 @@ function SingleBookPage() {
         if (user) {
             return (
                 <article className="single-book-page">
-                    {/* <h3>Currently logged in as: {user.fullName}</h3> */}
-
                     <div className="single-book-container">
                         <img className="book-img" src={singleBook.imageLinks.small} alt="book cover" />
 

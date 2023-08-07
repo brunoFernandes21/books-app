@@ -37,7 +37,6 @@ const RegisterPage = () => {
                 readBooks: [],
                 currentlyReading: [],
             });
-            console.log("Response from send data function >>", response);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -62,9 +61,7 @@ const RegisterPage = () => {
                     console.log(error)
                 })
 
-                router.push("/login");
-                console.log("Account created", user)
-                
+                router.push("/login");                
                 
             } catch (error) {
                 console.log(error);
