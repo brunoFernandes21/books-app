@@ -75,9 +75,20 @@ function SingleBookPage() {
             readBooks: arrayUnion(               
                 {bookID: id,
                 bookInfo: singleBook}),
-        });
-        
+        }); 
     };
+
+    const clearHTMLTags = (strToSanitize) => {
+        if(strToSanitize){
+            return(strToSanitize.replace(/(<([^>]+)>)/gi, ``));
+        }
+        else{
+            return "No description available"
+        }
+      }
+
+    
+
     if(!error){
         if (loading) {
             return <p>Loading...</p>;
@@ -91,7 +102,7 @@ function SingleBookPage() {
                             <div className="single-book-info">
                                 <h3>{singleBook.title}</h3>
                                 <p>Author: {singleBook.authors}</p>
-                                <p>Description: {singleBook.description}</p>
+                                <p>Description: {clearHTMLTags(singleBook.description)}</p>
                                 <p>Published: {singleBook.publishedDate}</p>
     
                                 <div className="button-container">

@@ -9,7 +9,7 @@ export const getBooksBySearchTerm = async (searchTerm, criteria) => {
     return response.data.items;
 }
 export const getFeaturedBooks = async () => {
-    const response = await myBooksApi.get(`?q=rating`)
+    const response = await myBooksApi.get(`?q=averageRating=5`)
     return response.data.items
 }
 

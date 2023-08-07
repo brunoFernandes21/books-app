@@ -9,6 +9,7 @@ import {auth} from "@/app/firebase/config"
 import {useContext} from 'react'
 import {AuthContext} from "@/app/context/AuthContext"
 import { useRouter } from "next/navigation";
+import AllUsersFavourites from "./components/AllUsersFavourites"
 
 
 export default function Home() {
@@ -42,6 +43,9 @@ export default function Home() {
         )}
         <section className="mt-40">
           <Featured />
+        </section>
+        <section>
+          <AllUsersFavourites />
         </section>
       </main>
     );
