@@ -16,7 +16,9 @@ export default function Home() {
 
   const [books, setBooks] = useState([]);
   const {user, setUser, loading, setLoading, } = useContext(AuthContext)
+  const[error, setError]= useState(false)
   useEffect(() => {
+    setError(false)
     onAuthStateChanged(auth, (user) => {
       setUser(user)
      }
@@ -27,15 +29,15 @@ export default function Home() {
    if (user) {
     return (
       <main>
-        <Search setBooks={setBooks} />
+        <Search setBooks={setBooks} books={books} />
         <section className="flex justify-center mt-10 p-10 border-4 border-red-600">
           <p>Welcome to MyBooks</p>
           <p>Search for books to add to your favourites</p>
           <p>your currently reading list, and save for later</p>
         </section>
-        {books.length > 0 && (
+        {!error && (
           <div className=" border-orange border-4 p-10">
-            <BookSearchResult books={books} />
+            <BookSearchResult books={books} setError={setError} error={error} />
           </div>
         )}
         <section className="mt-40">
