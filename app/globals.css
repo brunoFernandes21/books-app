@@ -23,7 +23,6 @@
     border-radius: 5px;
     border: 1px solid white
 }
-/* LOGIN and REGISTER FORMS */
 
 .active {
     display: flex;
@@ -31,31 +30,6 @@
     justify-content: center;
     align-items: center;
 }
-/* .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-} */
-
-/* .form-title {
-    font-size: 2rem;
-    font-weight: bold;
-    align-self: center;
-    margin-bottom: 50px;
-    text-align: center;
-} */
-
-/* .form {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    max-width: 550px;
-    padding: 40px 50px;
-    background-color: aliceblue;
-    border-radius: 10px;
-} */
 
 .form input {
     border: 1px solid grey;
@@ -87,22 +61,22 @@
 /* SINGLE BOOK PAGE */
 
 .single-book-page {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     height: 100vh;
     align-items: center;
-    justify-items: center;
+    justify-items: center; */
 }
 
 .single-book-container {
-    width: 80%;
+    /* width: 80%;
     max-width: 700px;
     border: 1px solid black;
     border-radius: 20px;
     background-color: white;
     padding: 20px;
     text-align: center;
-    display: flex;
+    display: flex; */
 }
 
 h3 {
@@ -114,26 +88,17 @@ h3 {
     width: 50%;
 }
 
-.single-book-info {
+/* .single-book-info {
     display: flex;
     flex-direction: column;
     width: 50%;
-}
+} */
 
 .button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
-}
-
-.button-container button {
-    border: 1px solid grey;
-    padding: 5px 10px;
-    background-color: #dffeff;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    width: 60%;
 }
 
 /* PROFILE PAGE */

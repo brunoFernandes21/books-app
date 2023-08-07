@@ -8,8 +8,6 @@ import Link from "next/link";
 
 const auth = getAuth(app);
 
-
-
 const RegisterPage = () => {
     
   const [formData, setFormData] = useState({
