@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} bg-blue-200`}>
         <AuthProvider>
         <Navbar/>
-          <main>{children}</main>
+          <main className="px-5 md:px-20 lg:px-40">{children}</main>
         </AuthProvider>
       </body>
     </html>

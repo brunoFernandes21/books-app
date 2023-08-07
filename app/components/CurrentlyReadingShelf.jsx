@@ -9,8 +9,8 @@ import { db } from "../firebase/config";
 import { DBBookCard } from "../components/DBBookCard";
 import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
 
-const CurrentlyReading = () => {
-  const { user, setUser, loading, setLoading } = useContext(AuthContext);
+const CurrentlyReadingShelf = () => {
+    const { user, setUser, loading, setLoading } = useContext(AuthContext);
   let router = useRouter();
   const [books, setBooks] = useState([]);
 
@@ -44,16 +44,13 @@ const CurrentlyReading = () => {
       currentlyReading: arrayRemove(book),
     });
   };
-
-
   return (
-    <main>
-      <h1>These are the books you are currently reading</h1>
-      {books.map((book) => {
-        return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
-      })}
-    </main>
-  );
-};
+    <section className="flex flex-row flex-wrap">
+    {books.map((book) => {
+      return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
+    })}
+  </section>
+  )
+}
 
-export default CurrentlyReading;
+export default CurrentlyReadingShelf
