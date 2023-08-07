@@ -5,9 +5,9 @@ import { AuthContext } from "@/app/context/AuthContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
-import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { DBBookCard } from "../components/DBBookCard";
+import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
 
 const ReadBooksPage = () => {
   const { user, setUser, loading, setLoading } = useContext(AuthContext);
@@ -33,11 +33,23 @@ const ReadBooksPage = () => {
     });
   }, []);
 
+  const removeBook = async (book, id) => {
+    // try and do with state
+    const filteredBooks = books.filter((book) => {
+      return book.bookID !== id
+    })
+    setBooks(filteredBooks)
+    const docRef = doc(db, "userData", user.uid);
+    await updateDoc(docRef, {
+      readBooks: arrayRemove(book),
+    });
+  };
+
   return (
     <main>
       <h1>You're a bookworm! See what you've read below</h1>
       {books.map((book) => {
-        return <DBBookCard key={book.bookID} book={book} />;
+        return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
       })}
     </main>
   );
