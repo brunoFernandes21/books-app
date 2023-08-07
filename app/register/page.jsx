@@ -13,6 +13,7 @@ const RegisterPage = () => {
         confirmPassword: "",
     });
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     const handleChange = (event) => {
         setFormData((previousFormData) => {
@@ -44,6 +45,7 @@ const RegisterPage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setError(null)
         const email = formData.email;
         const password = formData.password;
         setLoading(true)
@@ -58,15 +60,16 @@ const RegisterPage = () => {
                 }).then(() => {
                     console.log("Profile updated", displayName)
                 }).catch((error) => {
-                    console.log(error)
+                    setError("Incorrect details")
                 })
-
                 router.push("/login");                
-                
             } catch (error) {
-                console.log(error);
+                setError("Incorrect details")
             }
             setLoading(false)
+        }   else {
+            setError("Passwords do not match")
+
         }
     };
 
@@ -127,7 +130,9 @@ const RegisterPage = () => {
                 </div>
 
                 <button className="bg-blue-500 p-2 rounded text-white">Register</button>
+                {error ? <p>{error}</p> : null}
             </form>
+            
         </div>
     );
 };
