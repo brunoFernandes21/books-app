@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.main {
+    background: rgb(63,94,251);
+    background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.landing__page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
 .bookCard img {
     height: 250px;
     width: 200px;
@@ -16,23 +31,23 @@
     justify-content: center;
     align-items: center;
 }
-.form-container {
+/* .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-}
+} */
 
-.form-title {
+/* .form-title {
     font-size: 2rem;
     font-weight: bold;
     align-self: center;
     margin-bottom: 50px;
     text-align: center;
-}
+} */
 
-.form {
+/* .form {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -40,7 +55,7 @@
     padding: 40px 50px;
     background-color: aliceblue;
     border-radius: 10px;
-}
+} */
 
 .form input {
     border: 1px solid grey;
@@ -61,7 +76,6 @@
 
 .input-wrapper label {
     margin-right: 5px;
-    /* width: 20%; */
     white-space: nowrap;
 }
 
