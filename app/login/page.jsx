@@ -43,8 +43,7 @@ const LoginPage = () => {
             router.push("/");
             
         } catch (error) {
-            setIsError(error.message);
-        }
+            setIsError("Incorrect user details, please try again.")        }
     };
 
     return (
