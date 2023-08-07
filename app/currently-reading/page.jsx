@@ -5,9 +5,9 @@ import { AuthContext } from "@/app/context/AuthContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
-import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { DBBookCard } from "../components/DBBookCard";
+import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
 
 const CurrentlyReading = () => {
   const { user, setUser, loading, setLoading } = useContext(AuthContext);
@@ -33,18 +33,24 @@ const CurrentlyReading = () => {
     });
   }, []);
 
-  //make a call to firebase and retrieve the favourite books
-  //once we get all the books back, we'll set books to the books we get back
-  // then we'll display them in cards
-  //grid or flexbox
+  const removeBook = async (book, id) => {
+    // try and do with state
+    const filteredBooks = books.filter((book) => {
+      return book.bookID !== id
+    })
+    setBooks(filteredBooks)
+    const docRef = doc(db, "userData", user.uid);
+    await updateDoc(docRef, {
+      currentlyReading: arrayRemove(book),
+    });
+  };
 
-  
 
   return (
     <main>
       <h1>These are the books you are currently reading</h1>
       {books.map((book) => {
-        return <DBBookCard key={book.bookID} book={book} />;
+        return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
       })}
     </main>
   );
