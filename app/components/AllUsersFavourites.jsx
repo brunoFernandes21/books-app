@@ -3,6 +3,7 @@ import { getDocs, collection } from 'firebase/firestore'
 import { db } from "../firebase/config"
 import React, { useEffect, useState } from 'react'
 import { DBBookCard } from './DBBookCard'
+import Link from "next/link";
 
 
 
@@ -52,9 +53,10 @@ function AllUsersFavourites() {
             <div className="flex w-full justify-between flex-row gap-4 ">
                {favouritesData.length !== 0 ? (favouritesData.map((favouriteBook) => {
                     return (
-                        <div key={favouriteBook.bookID}>
+                        
+                        <Link href={`http://localhost:3000/singlebook/${favouriteBook.bookID}`} key={favouriteBook.bookID}>
                             <img src={favouriteBook.bookInfo.imageLinks.smallThumbnail ?favouriteBook.bookInfo.imageLinks.smallThumbnail : "https://img.freepik.com/free-vector/open-blue-book-white_1308-69339.jpg?w=826&t=st=1[…]4e6e1b459442a3a22f4ff98073ddebe88a1700930b1c10a1b41660b511b70" } alt={`${favouriteBook.bookInfo.title}`}/> 
-                        </div>
+                        </Link>
                     )
                 })) : (<p> No Favourites to show</p>)} 
             </div>
