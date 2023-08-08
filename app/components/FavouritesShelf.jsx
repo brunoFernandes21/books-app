@@ -8,28 +8,33 @@ import { useRouter } from "next/navigation";
 import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { DBBookCard } from "../components/DBBookCard";
-
+import Link from "next/link";
 
 const FavouritesShelf = () => {
-    const { user, setUser, loading, setLoading } = useContext(AuthContext);
-    let router = useRouter();
-    const [books, setBooks] = useState([]);
-  
-    const getUsersFavourites = async (user) => {
-      const docRef = doc(db, "userData", user.uid);
+  const { user, setUser, loading, setLoading } = useContext(AuthContext);
+  let router = useRouter();
+  const [books, setBooks] = useState([]);
+
+  const getUsersFavourites = async (user) => {
+    const docRef = doc(db, "userData", user.uid);
+    try {
       const responseWithSingleUser = await getDoc(docRef);
       const singleUserData = responseWithSingleUser.data();
       setBooks(singleUserData.favourites);
-    };
+    } catch(error) {
+      console.log(error)
+    }
+  }
   
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
-        setUser(user);
+   
         if (!user) {
           router.push("/login");
         } else {
-          getUsersFavourites(user);
           console.log("user logged in");
+          setUser(user);
+          getUsersFavourites(user);
         }
       });
     }, []);
@@ -48,14 +53,17 @@ const FavouritesShelf = () => {
     };
   
     return (
-      <section className="flex flex-row flex-wrap">
-        {books.map((book) => {
-          return (
-            <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
-          );
-        })}
+      <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
+        <Link className="text-xl font-bold" href="/favourites">Favourites</Link>
+        <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
+          {books.map((book) => {
+            return (
+              <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
+            );
+          })}
+        </div>
       </section>
     );
-}
+};
 
-export default FavouritesShelf
+export default FavouritesShelf;

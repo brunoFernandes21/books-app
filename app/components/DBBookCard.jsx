@@ -11,8 +11,8 @@ export const DBBookCard = ({ book, removeBook }) => {
       {book.bookInfo.imageLinks ?
       <img src={book.bookInfo.imageLinks.smallThumbnail} alt={`${book.bookInfo.title}`}/> : <Image src={DefaultCover} alt="No cover available"/>}
       </Link>
-      <button onClick={()=> removeBook(book, book.bookID)} className="absolute top-3 left-36 text-white bg-white p-2 rounded-full">
-        <Image src={Trash} alt="Image of a trash can" width={30} height={30}/>
+      <button onClick={()=> removeBook(book, book.bookID)} className="absolute top-3 left-40 text-white bg-white p-2 rounded-full">
+        <Image src={Trash} alt="Image of a trash can" width={20} height={20}/>
       </button>
     </div>
   );

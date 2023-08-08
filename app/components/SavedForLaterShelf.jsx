@@ -8,27 +8,32 @@ import { useRouter } from "next/navigation";
 import { db } from "../firebase/config";
 import { DBBookCard } from "./DBBookCard";
 import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
+import Link from "next/link";
 
 const SavedForLaterShelf = () => {
-    const { user, setUser, loading, setLoading } = useContext(AuthContext);
-    let router = useRouter();
-    const [books, setBooks] = useState([]);
-  
-    const   getUsersSaved = async (user) => {
-      const docRef = doc(db, "userData", user.uid);
+  const { user, setUser, loading, setLoading } = useContext(AuthContext);
+  let router = useRouter();
+  const [books, setBooks] = useState([]);
+
+  const getUsersSaved = async (user) => {
+    const docRef = doc(db, "userData", user.uid);
+    try {
       const responseWithSingleUser = await getDoc(docRef);
       const singleUserData = responseWithSingleUser.data();
-      setBooks(singleUserData.savedBooks)
+      setBooks(singleUserData.savedBooks);
+    } catch (error) {
+      console.log(error);
     }
+  }
     
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
-        setUser(user);
         if(!user) {
           router.push('/login')
         }else {
-          getUsersSaved(user)
           console.log("user logged in")
+          setUser(user);
+          getUsersSaved(user)
         }
       });
     }, []);
@@ -46,12 +51,18 @@ const SavedForLaterShelf = () => {
     };
   
     return (
-      <section className="flex flex-row flex-wrap">
-        {books.map((book) => {
-          return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
-        })}
+      <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
+        <Link className="text-xl font-bold" href="/saved-for-later">Saved For Later</Link>
+        <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
+          {books.map((book) => {
+            return (
+              <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
+            );
+          })}
+        </div>
       </section>
     );
 }
 
-export default SavedForLaterShelf
+
+export default SavedForLaterShelf;
