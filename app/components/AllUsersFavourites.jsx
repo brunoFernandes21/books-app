@@ -29,7 +29,6 @@ function AllUsersFavourites() {
             const uniqueBooksSet = new Set();
             allUsersData.forEach((singleUser) => {
                 const singleUserFavourites = singleUser.favourites;
-                // console.log("FAVOURITES", singleUserFavourites);
                 singleUserFavourites.forEach((favouriteBook) => {
                     if (!uniqueBooksSet.has(favouriteBook.bookID)) {
                         uniqueBooksSet.add(favouriteBook.bookID);
@@ -38,8 +37,6 @@ function AllUsersFavourites() {
                 });
             });
             setFavouritesData(uniqueFavourites);
-            // console.log(uniqueFavourites, "uniqueFavourites");
-            // console.log(uniqueBooksSet, "uniqueBooksSet");
         }
     };
     useEffect(() => {
@@ -48,33 +45,15 @@ function AllUsersFavourites() {
     useEffect(() => {
         getAllFavourites()
     }, [allUsersData])
-    // return (
 
-    //     <div>
-    //         <p>Other Users Favourite Books</p>
-    //         {favouritesData.length !== 0 ? (
-    //             favouritesData.map((favouriteBook) => {
-    //                 return (
-    //                     <div key={favouriteBook.bookID}>
-    //                         <p>{favouriteBook.bookInfo.title}</p>
-    //                     </div>
-    //                 );
-    //             })
-    //         ) : (
-    //             <p>No favourites to show</p>
-    //         )}
-    //     </div>
-
-    // )
     return (
         <div className="book-title flex justify-center flex-col items-center p-2">
             <h3>Users Favourites</h3>
             <div className="flex w-full justify-between flex-row gap-4 ">
                {favouritesData.length !== 0 ? (favouritesData.map((favouriteBook) => {
-                    console.log(favouriteBook)
                     return (
                         <div key={favouriteBook.bookID}>
-                            <p>{favouriteBook.bookInfo.title}</p>
+                            <img src={favouriteBook.bookInfo.imageLinks.smallThumbnail ?favouriteBook.bookInfo.imageLinks.smallThumbnail : "https://img.freepik.com/free-vector/open-blue-book-white_1308-69339.jpg?w=826&t=st=1[…]4e6e1b459442a3a22f4ff98073ddebe88a1700930b1c10a1b41660b511b70" } alt={`${favouriteBook.bookInfo.title}`}/> 
                         </div>
                     )
                 })) : (<p> No Favourites to show</p>)} 
