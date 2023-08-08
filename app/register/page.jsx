@@ -17,7 +17,8 @@ const RegisterPage = () => {
     password: "",
     confirmPassword: "",
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);    const [error, setError] = useState(null)
+
   const handleChange = (event) => {
     setFormData((previousFormData) => {
       const { name, value } = event.target;
@@ -46,49 +47,45 @@ const RegisterPage = () => {
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const email = formData.email;
-    const password = formData.password;
-    setLoading(true);
-    if (formData.password === formData.confirmPassword) {
-      try {
-        const response = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        //set user to the user(use auth.currentUser)
-        setUser(auth.currentUser)
-        const userID = response.user.reloadUserInfo.localId;
-        sendData(userID);
-        updateProfile(auth.currentUser, {
-          displayName: formData.fullName,
-        })
-          .then(() => {
-            console.log("Profile updated", displayName);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-          
-        router.push("/");
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    }
-  };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setError(null)
+        const email = formData.email;
+        const password = formData.password;
+        setLoading(true)
+        if (formData.password === formData.confirmPassword) {
+            try {
+                const response = await createUserWithEmailAndPassword(auth, email, password);
+                const user = response.user
+                const userID = response.user.reloadUserInfo.localId;
+                sendData(userID);
+                updateProfile(auth.currentUser, {
+                    displayName: formData.fullName
+                }).then(() => {
+                    console.log("Profile updated", displayName)
+                }).catch((error) => {
+                    setError("Incorrect details")
+                })
+                router.push("/login");                
+            } catch (error) {
+                setError("Incorrect details")
+            }
+            setLoading(false)
+        }   else {
+            setError("Passwords do not match")
+
+        }
+    };
 
   return (
     <div className="landing__page max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
       <form onSubmit={handleSubmit} className="border px-6 py-8 rounded shadow-md text-white w-full">
         <h1 className="mb-6 text-3xl text-center">Register</h1>
-        {/* {error && (
-          <div className='bg-red-100 border mb-5 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"'>
+        {error && (
+          <div className='bg-red-100 border mb-5 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" text-center'>
             <span className="font-bold">{error}</span>
           </div>
-        )} */}
+        )}
         <label htmlFor="fullName">Full Name</label>
         <input
           type="text"
@@ -139,6 +136,7 @@ const RegisterPage = () => {
           </Link>
         </div>
       </form>
+            
     </div>
   );
 

@@ -3,9 +3,10 @@ import { useState } from "react";
 import { getBooksBySearchTerm } from "../api/route";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import {BsCamera} from "react-icons/bs"
-const Search = ({ setBooks }) => {
+const Search = ({ setBooks, books , setError}) => {
   const [search, setSearch] = useState("");
   const [criteria, setCriteria] = useState("intitle")
+  // const [error, setError] = useState(null)
 
   const handleChange = (event) => {
     setSearch(event.target.value)
@@ -18,9 +19,11 @@ const Search = ({ setBooks }) => {
       setBooks(booksResult)
       setSearch("")
     } catch (error) {
+      setError(true)
       console.log(error);
     }
   };
+  console.log(books)
   const bookScanner = () => {
     function onScanSuccess(decodedText, decodedResult) {
       // handle the scanned code as you like, for example:

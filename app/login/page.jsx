@@ -40,16 +40,16 @@ const LoginPage = () => {
       const docRef = doc(db, "userData", userID);
       const responseWithSingleUser = await getDoc(docRef);
 
-      if (!responseWithSingleUser.exists()) {
-        console.error("Unable to get user details for " + userID);
-        return;
-      }
-      const singleUserData = responseWithSingleUser.data();
-      router.push("/");
-    } catch (error) {
-      setIsError(error.message);
-    }
-  };
+            if (!responseWithSingleUser.exists()) {
+                console.error("Unable to get user details for " + userID);
+                return;
+            }
+            const singleUserData = responseWithSingleUser.data();
+            router.push("/");
+            
+        } catch (error) {
+            setIsError("Incorrect user details, please try again.")        }
+    };
 
   return (
     <div className="landing__page max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -58,10 +58,10 @@ const LoginPage = () => {
         className="border px-6 py-8 rounded shadow-md text-white w-full"
       >
         <h1 className="mb-6 text-3xl text-center">Login</h1>
-        {/* {error && 
-          <div className='bg-red-100 border mb-5 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"'>
-            <span className='font-bold'>{error}</span>
-          </div>} */}
+        {isError && 
+          <div className='bg-red-100 border mb-5 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" text-center'>
+            <span className='font-bold'>{isError}</span>
+          </div>}
         <label htmlFor="email">Email</label>
         <input
           type="text"
