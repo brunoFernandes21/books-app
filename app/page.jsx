@@ -41,6 +41,9 @@ export default function Home() {
             <BookSearchResult books={books} />
           </div>
         )}
+                <section className="map mt-10 rounded">
+        <iframe className="rounded-2xl" src="https://map.proxi.co/r/Uscl2AFwsvD98RG3MMYd" allow="geolocation; clipboard-write" width="100%" height="625px" style={{borderWidth: + "0px"}} allowfullscreen></iframe> <div style={{fontFamily: + "Sans-Serif", fontSize: + "12px", color: + "#000000", opacity: + "0.5", paddingTop: + "5px"}}> powered by <a href="https://www.proxi.co/?utm_source=poweredbyproxi" style={{color: + "#000000"}} target="_blank">Proxi</a> </div>
+        </section>
         <section className="mt-10">
           <Featured />
         </section>
