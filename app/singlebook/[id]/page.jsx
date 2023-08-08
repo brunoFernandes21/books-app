@@ -34,41 +34,49 @@ function SingleBookPage() {
         setSingleBook(data);
         setLoading(false);
       } catch (error) {
-                setError(true)
+          setError(true)
         console.log(error);
       }
     };
     getBookById();
   }, []);
 
-  const addToFavourites = async () => {
+  const addToFavourites = async (e) => {
     const docRef = doc(db, "userData", user.uid);
     const updateAction = await updateDoc(docRef, {
       favourites: arrayUnion({ bookID: id, bookInfo: singleBook }),
     });
+   console.log(e)
+   e.target.classList.add("button-clicked")
+   e.target.innerText="Added to favourites"
   };
 
-  const addToCurrentlyReading = async () => {
+  const addToCurrentlyReading = async (e) => {
     const docRef = doc(db, "userData", user.uid);
     const updateAction = await updateDoc(docRef, {
       currentlyReading: arrayUnion({ bookID: id, bookInfo: singleBook }),
     });
+    e.target.classList.add("button-clicked")
+    e.target.innerText="Added to currently reading"
   };
-
-  const saveForLater = async () => {
+  const saveForLater = async (e) => {
     const docRef = doc(db, "userData", user.uid);
     const updateAction = await updateDoc(docRef, {
       savedBooks: arrayUnion({ bookID: id, bookInfo: singleBook }),
     });
+    e.target.classList.add("button-clicked")
+    e.target.innerText="Added to save for later"
   };
 
-    const markAsRead = async () => {
+    const markAsRead = async (e) => {
         const docRef = doc(db, "userData", user.uid);
         const updateAction = await updateDoc(docRef, {
             readBooks: arrayUnion(               
                 {bookID: id,
                 bookInfo: singleBook}),
         }); 
+        e.target.classList.add("button-clicked")
+        e.target.innerText="Added to mark as read"
     };
 
     const clearHTMLTags = (strToSanitize) => {
@@ -107,12 +115,12 @@ function SingleBookPage() {
                       <p className="text-center">Published {singleBook.publishedDate}</p>
                       <p className="mt-2">{clearHTMLTags(singleBook.description)}</p>
                       <div className="w-4/5 m-auto p-4" >
-                        <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1" onClick={addToFavourites}>Add to Favourites</button>
-                        <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1"  onClick={addToCurrentlyReading}>
+                        <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1" onClick={(e)=>addToFavourites(e)} >Add to Favourites</button>
+                        <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1"  onClick={(e)=>addToCurrentlyReading(e)}>
                           Add to Currently Reading
                         </button>
-                        <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1"  onClick={saveForLater}>Save for Later</button>
-                        <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1"  onClick={markAsRead}>Mark as Read</button>
+                        <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1"  onClick={(e)=>saveForLater(e)}>Save for Later</button>
+                        <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1"  onClick={(e)=>markAsRead(e)}>Mark as Read</button>
                       </div>
                     </div>
                   </div>

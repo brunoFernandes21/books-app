@@ -83,6 +83,9 @@ h3 {
     flex-direction: column;
     align-items: center;
 }
+.button-clicked {
+    background-color: rgb(123, 123, 130);
+}
 
 /* .profile-welcome {
     font-size: 2rem;
