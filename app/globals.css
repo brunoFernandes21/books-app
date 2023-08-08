@@ -58,24 +58,10 @@
     padding: 3px;
 }
 
-
-
 h3 {
     size: 2em;
     font-weight: 600;
 }
-
-
-
-/* .button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-} */
-
-
-/* PROFILE PAGE */
 
 .profile-page {
     height: 100vh;
@@ -83,10 +69,3 @@ h3 {
     flex-direction: column;
     align-items: center;
 }
-
-/* .profile-welcome {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 50px;
-    text-align: center;
-} */

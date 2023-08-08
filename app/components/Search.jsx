@@ -3,10 +3,9 @@ import { useState } from "react";
 import { getBooksBySearchTerm } from "../api/route";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import {BsCamera} from "react-icons/bs"
-const Search = ({ setBooks, books , setError}) => {
+const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
   const [search, setSearch] = useState("");
   const [criteria, setCriteria] = useState("intitle")
-  // const [error, setError] = useState(null)
 
   const handleChange = (event) => {
     setSearch(event.target.value)
@@ -18,15 +17,15 @@ const Search = ({ setBooks, books , setError}) => {
       const booksResult = await getBooksBySearchTerm(search, criteria);
       setBooks(booksResult)
       setSearch("")
+      setShowSearchResults(true)
     } catch (error) {
       setError(true)
       console.log(error);
     }
   };
-  console.log(books)
+
   const bookScanner = () => {
     function onScanSuccess(decodedText, decodedResult) {
-      // handle the scanned code as you like, for example:
       if (decodedText.length === 10 || decodedText.length === 13) {
         getBooksBySearchTerm(decodedText, "ISBN").then((data) => {
           setBooks(data)
@@ -57,9 +56,9 @@ const Search = ({ setBooks, books , setError}) => {
       <div className="flex flex-row gap-4 mt-4 justify-center items-center">
         <p>Search by :</p>
         <div className="flex gap-4 text-white">
-          <button className="bg-slate-800 p-2 rounded-full text-sm font-bold" onClick={() => setCriteria("intitle")}>Title</button>
-          <button className="bg-slate-800 p-2 rounded-full text-sm font-bold" onClick={() => setCriteria("inauthor")}>Author</button>
-          <button className="bg-slate-800 p-2 rounded-full text-sm font-bold" onClick={() => setCriteria("ISBN")}>ISBN</button>
+          <button className="bg-slate-800 p-2 rounded-full text-sm font-bold focus:bg-white focus:text-slate-800 focus:ring focus:ring-violet-800" onClick={() => setCriteria("intitle")}>Title</button>
+          <button className="bg-slate-800 p-2 rounded-full text-sm font-bold focus:bg-white focus:text-slate-800 focus:ring focus:ring-violet-800" onClick={() => setCriteria("inauthor")}>Author</button>
+          <button className="bg-slate-800 p-2 rounded-full text-sm font-bold focus:bg-white focus:text-slate-800 focus:ring focus:ring-violet-800" onClick={() => setCriteria("ISBN")}>ISBN</button>
         </div>
       </div>
       <form onSubmit={handleSubmit} className=" flex justify-center items-center mt-4 w-full">
@@ -72,6 +71,7 @@ const Search = ({ setBooks, books , setError}) => {
           value={search}
           onChange={handleChange}
           className="border border-slate-800 rounded p-2 mx-2 w-80"
+          required
         />
         <button className="font-bold bg-slate-800 hover:bg-blue-500 p-2 rounded text-white m-right">Search</button>
 
