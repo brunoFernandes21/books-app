@@ -19,9 +19,9 @@ export const Featured = () => {
   }, []);
 
     return (
-        <div className="book-title flex justify-center flex-col items-center p-2">
+        <div className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
         <h3>Top 10 rated Books</h3>
-        <div className="flex w-full justify-between flex-row gap-4 ">
+        <div className="flex flex-row flex-wrap w-full gap-2 justify-center items-center">
           {featuredBooks.map((book) => {
             return <BookCard book={book} key={book.id} />;
           })}

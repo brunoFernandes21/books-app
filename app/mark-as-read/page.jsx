@@ -14,7 +14,7 @@ const ReadBooksPage = () => {
   let router = useRouter();
   const [books, setBooks] = useState([]);
 
-  const   getUsersRead = async (user) => {
+  const getUsersRead = async (user) => {
     const docRef = doc(db, "userData", user.uid);
     const responseWithSingleUser = await getDoc(docRef);
     const singleUserData = responseWithSingleUser.data();
@@ -22,13 +22,12 @@ const ReadBooksPage = () => {
   }
   
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      getUsersRead(user)
-      if(!user) {
+    onAuthStateChanged(auth, (currentUser) => {
+      if(!currentUser) {
         router.push('/login')
       }else {
-        console.log("user logged in")
+        setUser(currentUser);
+        getUsersRead(currentUser)
       }
     });
   }, []);
@@ -46,12 +45,16 @@ const ReadBooksPage = () => {
   };
 
   return (
-    <main>
-      <h1>You're a bookworm! See what you've read below</h1>
-      {books.map((book) => {
-        return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
-      })}
-    </main>
+    <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
+      <h3 className="text-xl" >Marked As Read</h3>
+      <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
+        {books.map((book) => {
+          return (
+            <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
+          );
+        })}
+      </div>
+    </section>
   );
 };
 
