@@ -7,7 +7,6 @@ import { db } from "../firebase/config";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-
 const auth = getAuth(app);
 
 const LoginPage = () => {
@@ -87,7 +86,7 @@ const LoginPage = () => {
           Click here to login
         </button>
         <div className="flex justify-center items-center gap-2 no-underline mt-3 text-center ">
-          <p>No login?</p>
+          <p>Do not have an account?</p>
           <Link href="/register">
             <span className="font-black border-b  hover:text-blue-800 hover:border-b-blue-800">
               Register here

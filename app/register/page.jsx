@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import { setDoc, doc } from "firebase/firestore";
 import { db, app } from "../firebase/config";
 import Link from "next/link";
-
+import { useContext } from "react";
+import { AuthContext } from "@/app/context/AuthContext";
 const auth = getAuth(app);
 
 const RegisterPage = () => {
-    
+  const { user, setUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -57,6 +58,8 @@ const RegisterPage = () => {
           email,
           password
         );
+        //set user to the user(use auth.currentUser)
+        setUser(auth.currentUser)
         const userID = response.user.reloadUserInfo.localId;
         sendData(userID);
         updateProfile(auth.currentUser, {

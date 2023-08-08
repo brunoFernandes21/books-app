@@ -14,7 +14,7 @@ const ReadBooksPage = () => {
   let router = useRouter();
   const [books, setBooks] = useState([]);
 
-  const   getUsersRead = async (user) => {
+  const getUsersRead = async (user) => {
     const docRef = doc(db, "userData", user.uid);
     const responseWithSingleUser = await getDoc(docRef);
     const singleUserData = responseWithSingleUser.data();
@@ -22,13 +22,12 @@ const ReadBooksPage = () => {
   }
   
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      getUsersRead(user)
-      if(!user) {
+    onAuthStateChanged(auth, (currentUser) => {
+      if(!currentUser) {
         router.push('/login')
       }else {
-        console.log("user logged in")
+        setUser(currentUser);
+        getUsersRead(currentUser)
       }
     });
   }, []);

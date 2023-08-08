@@ -18,17 +18,16 @@ const CurrentlyReading = () => {
     const docRef = doc(db, "userData", user.uid);
     const responseWithSingleUser = await getDoc(docRef);
     const singleUserData = responseWithSingleUser.data();
-    setBooks(singleUserData.currentlyReading)
-  }
-  
+    setBooks(singleUserData.currentlyReading);
+  };
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      getCurrentlyReading(user)
-      if(!user) {
-        router.push('/login')
-      }else {
-        console.log("user logged in")
+    onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) {
+        router.push("/login");
+      } else {
+        setUser(currentUser);
+        getCurrentlyReading(currentUser);
       }
     });
   }, []);
@@ -36,21 +35,22 @@ const CurrentlyReading = () => {
   const removeBook = async (book, id) => {
     // try and do with state
     const filteredBooks = books.filter((book) => {
-      return book.bookID !== id
-    })
-    setBooks(filteredBooks)
+      return book.bookID !== id;
+    });
+    setBooks(filteredBooks);
     const docRef = doc(db, "userData", user.uid);
     await updateDoc(docRef, {
       currentlyReading: arrayRemove(book),
     });
   };
 
-
   return (
     <main>
       <h1>These are the books you are currently reading</h1>
       {books.map((book) => {
-        return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
+        return (
+          <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
+        );
       })}
     </main>
   );

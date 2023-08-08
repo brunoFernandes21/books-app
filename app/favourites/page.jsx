@@ -15,20 +15,19 @@ const FavouritesPage = () => {
   const [books, setBooks] = useState([]);
 
   const getUsersFavourites = async (user) => {
-    const docRef = doc(db, "userData", user.uid);
-    const responseWithSingleUser = await getDoc(docRef);
-    const singleUserData = responseWithSingleUser.data();
-    setBooks(singleUserData.favourites);
+      const docRef = doc(db, "userData", user.uid);
+      const responseWithSingleUser = await getDoc(docRef);
+      const singleUserData = responseWithSingleUser.data();
+      setBooks(singleUserData.favourites);
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      getUsersFavourites(user);
-      if (!user) {
+    onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) {
         router.push("/login");
       } else {
-        console.log("user logged in");
+        setUser(currentUser);
+      getUsersFavourites(currentUser);
       }
     });
   }, []);

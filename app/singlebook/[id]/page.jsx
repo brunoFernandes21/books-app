@@ -92,7 +92,7 @@ function SingleBookPage() {
               <p className="mt-2">{singleBook.description}</p>
               
 
-              <div className="button-container">
+              <div className="w-4/5 m-auto p-4" >
                 <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1" onClick={addToFavourites}>Add to Favourites</button>
                 <button className="mb-2 w-full md:w-1/2 bg-blue-800 hover:bg-blue-400 font-black text-center py-3 rounded-full text-white my-1"  onClick={addToCurrentlyReading}>
                   Add to Currently Reading

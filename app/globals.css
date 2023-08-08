@@ -58,48 +58,22 @@
     padding: 3px;
 }
 
-/* SINGLE BOOK PAGE */
 
-.single-book-page {
-    /* display: flex;
-    flex-direction: column;
-    height: 100vh;
-    align-items: center;
-    justify-items: center; */
-}
-
-.single-book-container {
-    /* width: 80%;
-    max-width: 700px;
-    border: 1px solid black;
-    border-radius: 20px;
-    background-color: white;
-    padding: 20px;
-    text-align: center;
-    display: flex; */
-}
 
 h3 {
     size: 2em;
     font-weight: 600;
 }
 
-.book-img {
-    width: 50%;
-}
 
-/* .single-book-info {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-} */
 
-.button-container {
+/* .button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
-}
+} */
+
 
 /* PROFILE PAGE */
 
@@ -110,9 +84,9 @@ h3 {
     align-items: center;
 }
 
-.profile-welcome {
+/* .profile-welcome {
     font-size: 2rem;
     font-weight: bold;
     margin: 50px;
     text-align: center;
-}
+} */

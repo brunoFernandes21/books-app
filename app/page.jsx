@@ -11,16 +11,16 @@ import { AuthContext } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  let router = useRouter();
-
   const [books, setBooks] = useState([]);
   const { user, setUser, loading, setLoading } = useContext(AuthContext);
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    onAuthStateChanged(auth, (currentUser) => {
+      if(currentUser) {
+        setUser(currentUser)
+      }
     });
   }, []);
-
+  console.log(user)
   if (user) {
     return (
       <main>
@@ -41,13 +41,13 @@ export default function Home() {
             <BookSearchResult books={books} />
           </div>
         )}
-        {/* <hr /> */}
         <section className="mt-10">
           <Featured />
         </section>
       </main>
     );
-  } else {
+  } 
+  else {
     return <LandingPage />;
   }
 }

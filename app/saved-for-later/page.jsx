@@ -22,13 +22,12 @@ const SavedBooksPage = () => {
   }
   
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      getUsersSaved(user)
-      if(!user) {
+    onAuthStateChanged(auth, (currentUser) => {
+      if(!currentUser) {
         router.push('/login')
       }else {
-        console.log("user logged in")
+        setUser(currentUser);
+        getUsersSaved(currentUser)
       }
     });
   }, []);
