@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { db } from "../firebase/config";
 import { DBBookCard } from "../components/DBBookCard";
 import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
+import Link from "next/link";
 
 const MarkedAsReadShelf = () => {
   const { user, setUser, loading, setLoading } = useContext(AuthContext);
@@ -50,7 +51,7 @@ const MarkedAsReadShelf = () => {
 
   return (
     <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
-      <h3 className="text-xl" >Marked As Read</h3>
+      <Link className="text-xl font-bold" href="/mark-as-read" >Marked As Read</Link>
       <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
         {books.map((book) => {
           return (

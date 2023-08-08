@@ -46,14 +46,16 @@ const FavouritesPage = () => {
   };
 
   return (
-    <main>
-      <h1>These are your favourite books</h1>
-      {books.map((book) => {
-        return (
-          <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
-        );
-      })}
-    </main>
+    <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
+      <h3 className="text-xl" >Favourites</h3>
+      <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
+        {books.map((book) => {
+          return (
+            <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
+          );
+        })}
+      </div>
+    </section>
   );
 };
 

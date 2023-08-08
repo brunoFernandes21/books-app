@@ -45,12 +45,16 @@ const ReadBooksPage = () => {
   };
 
   return (
-    <main>
-      <h1>You're a bookworm! See what you've read below</h1>
-      {books.map((book) => {
-        return <DBBookCard key={book.bookID} book={book} removeBook={removeBook}/>;
-      })}
-    </main>
+    <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
+      <h3 className="text-xl" >Marked As Read</h3>
+      <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
+        {books.map((book) => {
+          return (
+            <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
+          );
+        })}
+      </div>
+    </section>
   );
 };
 

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { db } from "../firebase/config";
 import { DBBookCard } from "../components/DBBookCard";
 import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
+import Link from "next/link";
 
 const CurrentlyReadingShelf = () => {
   const { user, setUser, loading, setLoading } = useContext(AuthContext);
@@ -49,7 +50,7 @@ const CurrentlyReadingShelf = () => {
   };
   return (
     <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
-      <h3 className="text-xl" >Currently Reading</h3>
+      <Link className="text-xl font-bold" href="/currently-reading">Currently Reading</Link>
       <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
         {books.map((book) => {
           return (
