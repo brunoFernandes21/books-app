@@ -44,6 +44,12 @@ export default function Home() {
           <BookSearchResult books={books} error={error}/>
         </div>
         )}
+        <section className="mt-10">
+          <BestSellers/>
+        </section>
+        <section>
+          <AllUsersFavourites />
+        </section>
         <section className="map mt-10 rounded">
           <iframe
             className="rounded-2xl"
@@ -73,12 +79,6 @@ export default function Home() {
               Proxi
             </a>{" "}
           </div>
-        </section>
-        <section className="mt-10">
-          <BestSellers/>
-        </section>
-        <section>
-          <AllUsersFavourites />
         </section>
       </main>
     );

@@ -48,9 +48,9 @@ function AllUsersFavourites() {
     }, [allUsersData])
 
     return (
-        <div className="book-title  mt-10 flex justify-center flex-col items-center p-2 bg-white text-slate-800 rounded-2xl">
-            <h3>Users Favourites</h3>
-            <div className="flex justify-start flex-row gap-4 mt-2 p-4 overflow-x-scroll w-full">
+        <div className="book-title  mt-10 flex justify-center flex-col items-center pt-4 p-2 bg-white text-slate-800 rounded-2xl">
+            <h3 className='text-2xl'>Users Favourites</h3>
+            <div className="flex justify-start flex-row gap-4 p-4 overflow-x-scroll w-full">
                {favouritesData.length !== 0 ? (favouritesData.map((favouriteBook) => {
                     return (
                         <Link className='bookCard min-w-max'  href={`http://localhost:3000/singlebook/${favouriteBook.bookID}`} key={favouriteBook.bookID} >
