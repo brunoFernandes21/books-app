@@ -21,7 +21,7 @@ export const VoiceRecognition = ({ setSearch }) => {
       } else {
         recognition.stop();
       }
-      
+
     } else {
       alert("Web Speech API is not supported");
     }
@@ -40,13 +40,12 @@ export const VoiceRecognition = ({ setSearch }) => {
     <div className="container flex justify-center items-center ">
       <button
         onClick={toggleVoice}
-        className=" text-6xl  p-2"
+        className={` text-6xl  p-2 ${isListening ? "text-green-500" : ""}`}
         type="button"
         id="start-button"
       >
         <IoMicCircleSharp />
       </button>
-      {/* <button type="button" id="stop-button">Stop</button> */}
     </div>
   );
 };
