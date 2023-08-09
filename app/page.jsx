@@ -30,7 +30,7 @@ export default function Home() {
     return (
       <main>
         <section className="block mt-5 p-4 text-center text-xl ">
-          <h2 className="text-4xl font-bold mb-2">Welcome to Books-Buzz!</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-2">Welcome to Books-Buzz!</h2>
           <p>
             Search for books to add to your favourites, your currently reading
             list, and save for later
@@ -44,6 +44,12 @@ export default function Home() {
           <BookSearchResult books={books} error={error}/>
         </div>
         )}
+        <section className="mt-10">
+          <BestSellers/>
+        </section>
+        <section>
+          <AllUsersFavourites />
+        </section>
         <section className="map mt-10 rounded">
           <iframe
             className="rounded-2xl"
@@ -73,12 +79,6 @@ export default function Home() {
               Proxi
             </a>{" "}
           </div>
-        </section>
-        <section className="mt-10">
-          <BestSellers/>
-        </section>
-        <section>
-          <AllUsersFavourites />
         </section>
       </main>
     );
