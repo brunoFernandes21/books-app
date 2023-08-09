@@ -57,23 +57,23 @@ export default function Home() {
             allow="geolocation; clipboard-write"
             width="100%"
             height="625px"
-            style={{ borderWidth: +"0px" }}
-            allowfullscreen
+            // style={{ borderWidth: +"0px" }}
+            allowFullScreen
           ></iframe>{" "}
           <div
             style={{
-              fontFamily: +"Sans-Serif",
-              fontSize: +"12px",
-              color: +"#000000",
-              opacity: +"0.5",
-              paddingTop: +"5px",
+              fontFamily: "Sans-Serif",
+              fontSize: "12px",
+              color: "000000",
+              opacity: "0.5",
+              paddingTop: "5px",
             }}
           >
             {" "}
             powered by{" "}
             <a
               href="https://www.proxi.co/?utm_source=poweredbyproxi"
-              style={{ color: +"#000000" }}
+              style={{ color: "#000000" }}
               target="_blank"
             >
               Proxi
