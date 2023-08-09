@@ -47,8 +47,9 @@ function SingleBookPage() {
       favourites: arrayUnion({ bookID: id, bookInfo: singleBook }),
     });
    console.log(e)
-   e.target.classList.add("button-clicked")
    e.target.innerText="Added to favourites"
+   e.target.disabled ="true"
+   e.target.className="mb-2 w-full md:w-1/2 bg-gray-400 font-black text-center py-3 rounded-full text-white my-1"
   };
 
   const addToCurrentlyReading = async (e) => {
@@ -56,16 +57,16 @@ function SingleBookPage() {
     const updateAction = await updateDoc(docRef, {
       currentlyReading: arrayUnion({ bookID: id, bookInfo: singleBook }),
     });
-    e.target.classList.add("button-clicked")
     e.target.innerText="Added to currently reading"
+    e.target.className="mb-2 w-full md:w-1/2 bg-gray-400 font-black text-center py-3 rounded-full text-white my-1"
   };
   const saveForLater = async (e) => {
     const docRef = doc(db, "userData", user.uid);
     const updateAction = await updateDoc(docRef, {
       savedBooks: arrayUnion({ bookID: id, bookInfo: singleBook }),
     });
-    e.target.classList.add("button-clicked")
     e.target.innerText="Added to save for later"
+    e.target.className="mb-2 w-full md:w-1/2 bg-gray-400 font-black text-center py-3 rounded-full text-white my-1"
   };
 
     const markAsRead = async (e) => {
@@ -75,8 +76,8 @@ function SingleBookPage() {
                 {bookID: id,
                 bookInfo: singleBook}),
         }); 
-        e.target.classList.add("button-clicked")
         e.target.innerText="Added to mark as read"
+        e.target.className="mb-2 w-full md:w-1/2 bg-gray-400 font-black text-center py-3 rounded-full text-white my-1"
     };
 
     const clearHTMLTags = (strToSanitize) => {
