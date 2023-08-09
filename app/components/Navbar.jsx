@@ -54,6 +54,12 @@ const Navbar = () => {
 
           <Link
             className="hover:bg-slate-800 p-2 lg:hover:rounded-md w-full text-center "
+            href="/"
+          >
+            Home
+          </Link>
+          <Link
+            className="hover:bg-slate-800 p-2 lg:hover:rounded-md w-full text-center "
             href="/profile"
           >
             Profile
