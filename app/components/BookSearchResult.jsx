@@ -11,7 +11,7 @@ const BookSearchResult = ({ books, error }) => {
           })
         ) : (
           <div className="p-4 bg-white rounded-2xl text-slate-800 text-center  lg:w-1/2">
-            <p className="p-4 text-xl font-bold text-white border-2 rounded bg-red-300 border-red-500 p-2">No books found</p>
+            <p className="p-4 text-xl font-bold text-white border-2 rounded bg-red-300 border-red-500">No books found</p>
           </div>
         )}
       </div>
