@@ -3,6 +3,7 @@ import { useState } from "react";
 import { getBooksBySearchTerm } from "../api/route";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import {BsCamera} from "react-icons/bs"
+import { VoiceRecognition } from "./VoiceRecognition";
 const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
   const [search, setSearch] = useState("");
   const [criteria, setCriteria] = useState("intitle")
@@ -83,6 +84,7 @@ const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
       </div>
       <div id="result">
       </div>
+      <VoiceRecognition setSearch={setSearch}/>
     </div>
   );
 };
