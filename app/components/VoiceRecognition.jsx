@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from 'react';
+"use client";
+import React, { useEffect, useState } from "react";
+import { IoMicCircleSharp } from "react-icons/io5";
 
-
-export const VoiceRecognition = ({setSearch}) => {
+export const VoiceRecognition = ({ setSearch }) => {
+  const [isListening, setIsListening] = useState(false);
   useEffect(() => {
     let recognition;
-    if ('webkitSpeechRecognition' in window) {
+    if ("webkitSpeechRecognition" in window) {
       recognition = new webkitSpeechRecognition();
-      recognition.lang = 'en-US';
+      recognition.lang = "en-US";
       recognition.interimResults = true;
-      recognition.addEventListener('result', (e) => {
+      recognition.continuous = false;
+      recognition.addEventListener("result", (e) => {
         const transcript = e.results[0][0].transcript;
-        console.log(transcript)
-        setSearch(transcript)
+        setSearch(transcript);
       });
-      document.getElementById("start-button").addEventListener("click", () => {
+
+      if (isListening) {
         recognition.start();
-        console.log("started")
-      });
-      document.getElementById("stop-button").addEventListener("click", () => {
+      } else {
         recognition.stop();
-        console.log("stopped")
-      });
-    } 
-    
-    else {
+      }
+      
+    } else {
       alert("Web Speech API is not supported");
     }
 
@@ -32,15 +31,22 @@ export const VoiceRecognition = ({setSearch}) => {
         recognition.stop();
       }
     };
-  }, []);
+  }, [isListening]);
 
+  const toggleVoice = () => {
+    setIsListening((current) => !current);
+  };
   return (
-    <div className="container">
-      <form>
-        <button type="button" id="start-button">Start</button>
-        <button type="button" id="stop-button">Stop</button>
-      </form>
+    <div className="container flex justify-center items-center ">
+      <button
+        onClick={toggleVoice}
+        className=" text-6xl  p-2"
+        type="button"
+        id="start-button"
+      >
+        <IoMicCircleSharp />
+      </button>
+      {/* <button type="button" id="stop-button">Stop</button> */}
     </div>
   );
 };
-
