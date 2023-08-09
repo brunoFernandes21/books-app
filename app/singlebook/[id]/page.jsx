@@ -83,7 +83,7 @@ function SingleBookPage() {
 
   return (
     <main>
-      {error && <p className="text-2xl font-bold text-center mt-96">No book found</p>}
+      {error && <p className="text-2xl font-bold text-center mt-96">No books found</p>}
       {loading && !error && <p className="text-2xl font-bold text-center mt-96">Loading...</p>}
       {!loading && (
         <article className="mt-10 flex justify-center items-center m-auto bg-white rounded-2xl">
