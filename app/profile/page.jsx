@@ -28,18 +28,15 @@ function Profile() {
     if(user) {
       return (
         <main className='mt-10 text-center'>
-          <h1 className='font-bold text-xl'>Welcome back {user.displayName}!</h1>
-          {/* <div className='mt-5'>
-            <button className='bg-white p-3 rounded' >Update your details</button>
-          </div> */}
+          <h1 className='font-bold text-3xl md:text-4xl'>Welcome back, {user.displayName}!</h1>
+          <section className='mt-5'>
+            <FavouritesShelf/>
+          </section>
           <section className='mt-5'>
             <CurrentlyReadingShelf/>
           </section>
           <section className='mt-5'>
             <SavedForLaterShelf/>
-          </section>
-          <section className='mt-5'>
-            <FavouritesShelf/>
           </section>
           <section className='mt-5'>
             <MarkedAsReadShelf/>

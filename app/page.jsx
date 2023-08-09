@@ -30,7 +30,7 @@ export default function Home() {
     return (
       <main>
         <section className="block mt-5 p-4 text-center text-xl ">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">Welcome to Books-Buzz!</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-2">Welcome to Books-Buzz, {user.displayName}!</h2>
           <p>
             Search for books to add to your favourites, your currently reading
             list, and save for later
