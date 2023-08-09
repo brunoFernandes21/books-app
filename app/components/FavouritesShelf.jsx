@@ -53,9 +53,9 @@ const FavouritesShelf = () => {
     };
   
     return (
-      <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
-        <Link className="text-xl font-bold" href="/favourites">Favourites</Link>
-        <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
+      <section className="book-title mt-10 flex justify-center flex-col items-center pt-4 p-2 bg-white text-slate-800 rounded-2xl">
+        <Link className="text-2xl font-bold" href="/favourites">Favourites</Link>
+        <div className="flex justify-start flex-row gap-4 p-4 overflow-x-scroll w-full">
           {books.map((book) => {
             return (
               <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />

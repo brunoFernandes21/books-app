@@ -7,7 +7,7 @@ import DefaultCover from "../../public/images/DefaultCover.jpg"
 export const DBBookCard = ({ book, removeBook }) => {
   return (
     <div className="flex justify-content items-center flex-row relative" >
-      <Link href={`http://localhost:3000/singlebook/${book.bookID}`} className="bookCard">
+      <Link href={`http://localhost:3000/singlebook/${book.bookID}`} className='bookCard min-w-max'>
       {book.bookInfo.imageLinks ?
       <img src={book.bookInfo.imageLinks.smallThumbnail} alt={`${book.bookInfo.title}`}/> : <Image src={DefaultCover} alt="No cover available"/>}
       </Link>
