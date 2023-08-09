@@ -51,7 +51,7 @@ const Navbar = () => {
             showNavbar ? "active" : ""
           } hidden lg:flex lg:flex-row lg:justify-center lg:items-center  font-bold p-0`}
         >
-          <p className="hidden lg:flex justify-center items-center">Hello {welcome}</p>
+          <p className="hidden lg:flex justify-center items-center mr-2">Hello {welcome}</p>
           <Link
             className="hover:bg-slate-800 p-2 lg:hover:rounded-md w-full text-center "
             href="/profile"

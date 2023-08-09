@@ -197,12 +197,12 @@ function SingleBookPage() {
                 </div>
               )}
               {dupplicateMessage !== null && (
-                <div className='bg-red-100 border my-4 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" text-center'>
+                <div className='bg-red-100 w-1/2 m-auto border my-4 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" text-center'>
                   <span className="font-bold">{dupplicateMessage}</span>
                 </div>
               )}
               {dupplicateMessage === null && bookAdded !== null && (
-                <div className='bg-green-100 border my-4 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert" text-center'>
+                <div className='bg-green-100 w-1/2 m-auto border my-4 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert" text-center'>
                   <span className="font-bold">{bookAdded}</span>
                 </div>
               )}
