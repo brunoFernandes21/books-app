@@ -2,7 +2,6 @@
 import { getDocs, collection } from 'firebase/firestore'
 import { db } from "../firebase/config"
 import React, { useEffect, useState } from 'react'
-import { DBBookCard } from './DBBookCard'
 import Link from "next/link";
 
 

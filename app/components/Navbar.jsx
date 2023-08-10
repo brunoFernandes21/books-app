@@ -9,6 +9,8 @@ import { auth } from "@/app/firebase/config";
 import { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { onAuthStateChanged } from "firebase/auth";
+import AppLogo  from "@/public/images/navbar-logo.png"
+import Image from "next/image";
 
 const Navbar = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -45,7 +47,7 @@ const Navbar = () => {
       <nav className="p-4 relative border-b-2 lg:flex lg:justify-between lg:items-center">
       <div className="text-slate-100 font-black text-3xl">
         <Link href="/" onClick={() => setShowNavbar(false)}>
-          Books-Buzz
+          <Image width={250}  src={AppLogo} alt="Books-Buzz"/>
         </Link>
       </div>
 
