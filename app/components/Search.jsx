@@ -25,6 +25,7 @@ const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
     }
   };
 
+
   const inputRef = useRef();
 
   useEffect(() => {    
@@ -50,6 +51,7 @@ const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
       if (decodedText.length === 10 || decodedText.length === 13) {
         getBooksBySearchTerm(decodedText, "ISBN").then((data) => {
           setBooks(data)
+          setShowSearchResults(true)
           scanner.clear()
           document.getElementById("reader").remove()
         }).catch((err) => {
