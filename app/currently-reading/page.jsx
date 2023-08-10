@@ -10,9 +10,10 @@ import { DBBookCard } from "../components/DBBookCard";
 import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
 
 const CurrentlyReading = () => {
-  const { user, setUser, loading, setLoading } = useContext(AuthContext);
+  const { user, setUser} = useContext(AuthContext);
   let router = useRouter();
   const [books, setBooks] = useState([]);
+  const [loading ,setLoading]= useState(true)
 
   const getCurrentlyReading = async (user) => {
     const docRef = doc(db, "userData", user.uid);
@@ -32,6 +33,10 @@ const CurrentlyReading = () => {
     });
   }, []);
 
+  useEffect(()=>{
+    setLoading(false)
+  },[])
+
   const removeBook = async (book, id) => {
     // try and do with state
     const filteredBooks = books.filter((book) => {
@@ -45,6 +50,18 @@ const CurrentlyReading = () => {
   };
 
   return (
+    <div>
+    {loading &&( <p className="text-2xl font-bold text-center mt-96">Loading...</p> )}
+    {!loading && user && (<section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
+      <h3 className="text-xl" >Currently Reading</h3>
+      <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
+        {books.map((book) => {
+          return (
+            <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
+          );
+        })}
+      </div>
+    </section>)}
     <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
       <h3 className="text-xl" >Currently Reading</h3>
       <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
@@ -55,6 +72,7 @@ const CurrentlyReading = () => {
         })}
       </div>
     </section>
+    </div>
   );
 };
 
