@@ -55,7 +55,7 @@ const SavedBooksPage = () => {
       {!loading && user && (
         <section className="p-4 bg-white mt-5 rounded-2xl text-slate-800 text-center">
         <h3 className="text-xl" >Saved For Later</h3>
-        <div className="flex flex-row flex-wrap w-full gap-2 justify-start items-center">
+        <div className="flex flex-row flex-wrap w-full gap-2 justify-center items-center">
           {books.map((book) => {
             return (
               <DBBookCard key={book.bookID} book={book} removeBook={removeBook} />
