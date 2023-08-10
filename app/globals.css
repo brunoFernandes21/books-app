@@ -24,6 +24,11 @@
     border: 1px solid white
 }
 
+#title-button{
+    outline: none;
+    border: none;
+}
+
 .active {
     display: flex;
     flex-direction: column;

@@ -57,7 +57,7 @@ const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
       <div className="flex flex-row gap-4 mt-4 justify-center items-center">
         <p>Search by :</p>
         <div className="flex gap-4 text-white">
-          <button className="bg-slate-800 p-2 rounded-full text-sm font-bold focus:bg-white focus:text-slate-800 focus:ring focus:ring-violet-800" onClick={() => setCriteria("intitle")}>Title</button>
+          <button autoFocus id="title-button"className="bg-slate-800 p-2 rounded-full text-sm font-bold focus:bg-white focus:text-slate-800 focus:ring focus:ring-violet-800" onClick={() => setCriteria("intitle")}>Title</button>
           <button className="bg-slate-800 p-2 rounded-full text-sm font-bold focus:bg-white focus:text-slate-800 focus:ring focus:ring-violet-800" onClick={() => setCriteria("inauthor")}>Author</button>
           <button className="bg-slate-800 p-2 rounded-full text-sm font-bold focus:bg-white focus:text-slate-800 focus:ring focus:ring-violet-800" onClick={() => setCriteria("ISBN")}>ISBN</button>
         </div>
