@@ -35,7 +35,7 @@ function SingleBookPage() {
       if (currentUser) {
         setUser(currentUser);
       } else {
-        router.push("/login");
+        router.push("/landing-page");
       }
     });
   }, []);

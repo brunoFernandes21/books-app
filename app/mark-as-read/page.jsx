@@ -24,7 +24,7 @@ const ReadBooksPage = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if(!currentUser) {
-        router.push('/login')
+        router.push('/landing-page')
       }else {
         setUser(currentUser);
         getUsersRead(currentUser)
