@@ -25,31 +25,33 @@ const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
     }
   };
 
+
   const inputRef = useRef();
 
-  useEffect(() => {    
-    setSearchCriteria("intitle")
+  // useEffect(() => {    
+  //   setSearchCriteria("intitle")
 
-    }, [])
+  //   }, [])
 
-  const setSearchCriteria = (criteria) => {
-    setCriteria(criteria)
-    const currentButton = document.getElementById(criteria)
-    currentButton.classList.add("button-focus")
-    const buttons = document.querySelectorAll('button');
-    const arrayList = Array.from(buttons)
-    const removedButtons = arrayList.filter((button) => 
-    {return button.id !== criteria})
-    removedButtons.forEach((button) => {
-      button.classList.remove("button-focus")
-    })
-  }
+  // const setSearchCriteria = (criteria) => {
+  //   setCriteria(criteria)
+  //   const currentButton = document.getElementById(criteria)
+  //   currentButton.classList.add("button-focus")
+  //   const buttons = document.querySelectorAll('button');
+  //   const arrayList = Array.from(buttons)
+  //   const removedButtons = arrayList.filter((button) => 
+  //   {return button.id !== criteria})
+  //   removedButtons.forEach((button) => {
+  //     button.classList.remove("button-focus")
+  //   })
+  // }
 
   const bookScanner = () => {
     function onScanSuccess(decodedText, decodedResult) {
       if (decodedText.length === 10 || decodedText.length === 13) {
         getBooksBySearchTerm(decodedText, "ISBN").then((data) => {
           setBooks(data)
+          setShowSearchResults(true)
           scanner.clear()
           document.getElementById("reader").remove()
         }).catch((err) => {

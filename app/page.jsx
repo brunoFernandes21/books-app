@@ -29,6 +29,7 @@ export default function Home() {
         }
     });
   }, []);
+  console.log(books, 'page')
 
   // if (user) {
   return (

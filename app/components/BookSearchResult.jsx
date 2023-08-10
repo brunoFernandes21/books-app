@@ -2,6 +2,7 @@
 import { BookCard } from "./APIBookCard";
 
 const BookSearchResult = ({ books, error }) => {
+  console.log(books, "book component")
   if (error === false) {
     return (
       <div className="flex flex-row flex-wrap w-full gap-2 justify-center items-center">
