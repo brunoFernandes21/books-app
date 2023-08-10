@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Favicon from "../public/images/favicon.ico";
 import Navbar from "./components/Navbar";
 import "./globals.css";
