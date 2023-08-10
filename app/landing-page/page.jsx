@@ -1,13 +1,12 @@
 "use client"
 import Image from "next/image";
-import landingPageImage from "../../public/images/landingPageImage.png";
+import landingPageImage from "../../public/images/landing-page-logo.png";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
-
 const LandingPage = () => {
   const { user, setUser } = useContext(AuthContext);
   let router = useRouter();
@@ -23,12 +22,13 @@ const LandingPage = () => {
       <main className="landing__page ">
         {user && router.push("/")}
        {!user && (
-        <section className="rounded-2xl border-4 border-blue-950 text-slate-800 bg-white flex justify-center items-center flex-col p-4 m-auto">
+        <section className="rounded-2xl border-4 border-white text-white  flex justify-center items-center flex-col p-4 m-auto">
         <h1 className="uppercase font-black text-2xl my-4">
-          Welcome to my books
+          Welcome to Books-Buzz
         </h1>
         <div>
           <Image
+          className="hover:scale-110 transition-all ease-in"
             src={landingPageImage}
             width={250}
             height={250}
@@ -50,7 +50,6 @@ const LandingPage = () => {
             href="/register"
             className="bg-blue-800 p-2 font-bold rounded text-white hover:bg-blue-400"
           >
-            {" "}
             Register
           </Link>
         </div>

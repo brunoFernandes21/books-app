@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState, useContext } from "react";
 import React from "react";
-import Link from "next/link";
+import AltImage from "@/public/images/alt-image.png"
+
 import {
   doc,
   updateDoc,
@@ -173,6 +174,7 @@ function SingleBookPage() {
             <div className="flex justify-center">
               {singleBook.imageLinks.thumbnail ? (
                 <img
+
                   src={singleBook.imageLinks.thumbnail}
                   alt={`${singleBook.title}`}
                   className="rounded"
@@ -180,7 +182,9 @@ function SingleBookPage() {
               ) : (
                 <img
                   className="rounded"
-                  src="https://img.freepik.com/free-vector/open-blue-book-white_1308-69339.jpg?w=826&t=st=1[…]4e6e1b459442a3a22f4ff98073ddebe88a1700930b1c10a1b41660b511b70"
+
+                  alt={`${singleBook.title}`}
+                  src={AltImage}
                 />
               )}
             </div>
