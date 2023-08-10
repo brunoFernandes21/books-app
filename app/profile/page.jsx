@@ -1,5 +1,5 @@
 "use client";
-import {useContext} from 'react'
+import {useContext, useState} from 'react'
 import {AuthContext} from "@/app/context/AuthContext"
 import { onAuthStateChanged } from 'firebase/auth'
 import {auth} from "@/app/firebase/config"
@@ -14,6 +14,7 @@ import MarkedAsReadShelf from '../components/MarkedAsReadShelf';
 function Profile() {
   const router = useRouter();
   const {user, setUser} = useContext(AuthContext)
+  const [loading , setLoading]= useState(true)
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -24,11 +25,15 @@ function Profile() {
       }
      })
    }, [])
-
-    if(user) {
+   useEffect(()=>{
+    setLoading(false)
+   },[])
       return (
-        <main className='mt-10 text-center'>
-          <h1 className='font-bold text-3xl md:text-4xl'>Welcome back, {user.displayName}!</h1>
+        <div>
+          {loading && (
+        <p className="text-2xl font-bold text-center mt-96">Loading...</p>
+      )}
+          {!loading && user && ( <main className='mt-10 text-center'><h1 className='font-bold text-3xl md:text-4xl'>Welcome back, {user.displayName}!</h1>
           <section className='mt-5'>
             <FavouritesShelf/>
           </section>
@@ -40,14 +45,10 @@ function Profile() {
           </section>
           <section className='mt-5'>
             <MarkedAsReadShelf/>
-          </section>
-        </main>
+          </section> </main> ) } 
+          {!user && !loading && (<LandingPage />)}
+      </div>
       );
-    } else {
-      return (
-        <LandingPage />
-      )
-    }
   
 }
 
