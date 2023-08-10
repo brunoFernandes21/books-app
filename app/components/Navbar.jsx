@@ -18,8 +18,8 @@ const Navbar = () => {
 
   const logOut = () => {
     signOut(auth);
-    setUser(null);
-    router.push("/");
+    // setUser(null);
+    router.push("/landing-page");
   };
 
   const toggleNavbar = () => {
@@ -33,6 +33,7 @@ const Navbar = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setShowNavbar(false)
       helloUser(currentUser);
     });
   }, []);

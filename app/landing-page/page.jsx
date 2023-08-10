@@ -14,13 +14,14 @@ const LandingPage = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-          setUser(currentUser);
+    setUser(currentUser);
     });
   }, []);
   
-  if(!user) {
+
     return (
       <main className="landing__page ">
+        {user && router.push("/")}
        {!user && (
         <section className="rounded-2xl border-4 border-blue-950 text-slate-800 bg-white flex justify-center items-center flex-col p-4 m-auto">
         <h1 className="uppercase font-black text-2xl my-4">
@@ -57,10 +58,6 @@ const LandingPage = () => {
        )}
       </main>
     );
-  }else {
-    return router.push("/")
-    
-  }
   
 
 };

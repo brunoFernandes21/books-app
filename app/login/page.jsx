@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useContext } from "react";
 import { AuthContext } from "@/app/context/AuthContext";
-// import { auth } from "@/app/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 
 const auth = getAuth(app);
@@ -23,15 +22,11 @@ const LoginPage = () => {
     password: "",
   });
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (currentUser) => {
-  //     if (currentUser) {
-  //       setUser(currentUser);
-  //     } else {
-  //       router.push("/");
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+    });
+  }, []);
 
   const handleChange = (event) => {
     setLoginData((previousData) => {
@@ -70,7 +65,7 @@ const LoginPage = () => {
   return (
     <div className="landing__page max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
       {user && router.push("/")}
-
+      {!user && (
       <form
         onSubmit={handleSubmit}
         className="border px-6 py-8 rounded shadow-md text-white w-full"
@@ -113,6 +108,8 @@ const LoginPage = () => {
           </Link>
         </div>
       </form>
+
+      )}
     </div>
   );
 };

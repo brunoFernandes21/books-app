@@ -19,13 +19,14 @@ export default function Home() {
   useEffect(() => {
     setError(false);
     onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setLoading(false);
-      } else {
-        setLoading(true);
-        router.push("/landing-page");
-      }
+        if(currentUser) {
+          setUser(currentUser);
+          setLoading(false);
+        } else {
+          setUser(null);
+          setLoading(true);
+          router.push('/landing-page')
+        }
     });
   }, []);
 
