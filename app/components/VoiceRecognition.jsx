@@ -37,15 +37,15 @@ export const VoiceRecognition = ({ setSearch }) => {
     setIsListening((current) => !current);
   };
   return (
-    <div className="container flex justify-center items-center ">
-      <button
+    // <div className="container flex justify-center items-center  ">
+      <button 
         onClick={toggleVoice}
-        className={` text-6xl  p-2 ${isListening ? "text-green-500" : ""}`}
+        className={` text-6xl  ${isListening ? "text-slate-800" : "text-white"}`}
         type="button"
         id="start-button"
       >
-        <IoMicCircleSharp />
+        <IoMicCircleSharp className=" text-6xl rounded-full bg-slate-800 hover:bg-blue-500 p-2 " />
       </button>
-    </div>
+    // </div>
   );
 };
