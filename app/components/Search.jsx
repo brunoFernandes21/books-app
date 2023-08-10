@@ -107,7 +107,6 @@ const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
       <button className=" text-4xl rounded-full bg-slate-800 hover:bg-blue-500 p-2 text-white" onClick={bookScanner}><BsCamera/></button>
       <VoiceRecognition setSearch={setSearch}/>
       </div>
-
       <div id="reader">
       </div>
       <div id="result">
