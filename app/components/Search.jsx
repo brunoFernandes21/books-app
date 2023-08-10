@@ -67,18 +67,12 @@ const Search = ({ setBooks, books , setError, setShowSearchResults}) => {
       },
       fps: 10,
     })
-
-
     return scanner.render(onScanSuccess, onScanFailure);
   }
-
-  // console.log("ref", inputRef)
-
 
   return (
     <div className="p-4 m-auto mt-5 flex justify-center items-center flex-col bg-white rounded-2xl text-slate-800 max-w-2xl">
       <h2 className="font-bold text-xl ">Search for a book</h2>
-
       <div className="flex flex-row gap-4 mt-4 justify-center items-center">
         <p>Search by :</p>
         <div className="flex gap-4 text-white" ref={inputRef}>

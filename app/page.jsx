@@ -30,7 +30,6 @@ export default function Home() {
     });
   }, []);
 
-  // if (user) {
   return (
     <main>
       {loading && !user && (
@@ -57,7 +56,7 @@ export default function Home() {
           />
           {showSearchResults && (
             <div className=" p-4 bg-white mt-5 mb-10 rounded-2xl text-slate-800 text-center">
-              <h3 className="text-xl">Search Results</h3>
+              <h3 className="text-2xl mb-4">Search Results</h3>
               <BookSearchResult books={books} error={error} />
             </div>
           )}
@@ -74,7 +73,6 @@ export default function Home() {
               allow="geolocation; clipboard-write"
               width="100%"
               height="625px"
-              // style={{ borderWidth: +"0px" }}
               allowFullScreen
             ></iframe>{" "}
             <div
