@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword, updateProfile, getAuth} from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { setDoc, doc } from "firebase/firestore";
@@ -7,6 +7,8 @@ import { db, app } from "../firebase/config";
 import Link from "next/link";
 import { useContext } from "react";
 import { AuthContext } from "@/app/context/AuthContext";
+import { onAuthStateChanged } from "firebase/auth";
+
 const auth = getAuth(app);
 
 const RegisterPage = () => {
@@ -18,7 +20,12 @@ const RegisterPage = () => {
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(true);    const [error, setError] = useState(null)
-
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+    });
+  }, []);
+  console.log(user)
   const handleChange = (event) => {
     setFormData((previousFormData) => {
       const { name, value } = event.target;
@@ -79,6 +86,7 @@ const RegisterPage = () => {
 
   return (
     <div className="landing__page max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      {user && router.push('/')}
       <form onSubmit={handleSubmit} className="border px-6 py-8 rounded shadow-md text-white w-full">
         <h1 className="mb-6 text-3xl text-center">Register</h1>
         {error && (
@@ -140,66 +148,6 @@ const RegisterPage = () => {
     </div>
   );
 
-  // return (
-  //     <div className="form-container">
-  //         <form className="form" onSubmit={handleSubmit}>
-  //             <h2 className="form-title">Please register below.</h2>
-  //             <div className="input-wrapper">
-  //                 <label htmlFor="fullName">Full Name</label>
-  //                 <input
-  //                     type="text"
-  //                     id="fullName"
-  //                     name="fullName"
-  //                     value={formData.fullName}
-  //                     placeholder="Enter your full name..."
-  //                     onChange={handleChange}
-  //                     required
-  //                 />
-  //             </div>
-
-  //             <div className="input-wrapper">
-  //                 <label htmlFor="email">Email</label>
-  //                 <input
-  //                     type="text"
-  //                     id="email"
-  //                     name="email"
-  //                     value={formData.email}
-  //                     placeholder="Enter a valid email..."
-  //                     onChange={handleChange}
-  //                     required
-  //                 />
-  //             </div>
-
-  //             <div className="input-wrapper">
-  //                 <label htmlFor="password">Password</label>
-  //                 <input
-  //                     type="password"
-  //                     id="password"
-  //                     name="password"
-  //                     value={formData.password}
-  //                     placeholder="Enter a valid password..."
-  //                     onChange={handleChange}
-  //                     required
-  //                 />
-  //             </div>
-
-  //             <div className="input-wrapper">
-  //                 <label htmlFor="confirmPassword">Confirm Password</label>
-  //                 <input
-  //                     type="password"
-  //                     id="confirmPassword"
-  //                     name="confirmPassword"
-  //                     value={formData.confirmPassword}
-  //                     placeholder="Please confirm your password"
-  //                     onChange={handleChange}
-  //                     required
-  //                 />
-  //             </div>
-
-  //             <button className="bg-blue-500 p-2 rounded text-white">Register</button>
-  //         </form>
-  //     </div>
-  // );
 };
 
 export default RegisterPage;

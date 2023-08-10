@@ -6,16 +6,27 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "@/app/context/AuthContext";
+import { onAuthStateChanged } from "firebase/auth";
 
 const auth = getAuth(app);
 
 const LoginPage = () => {
+  const { user, setUser } = useContext(AuthContext);
+
   let router = useRouter();
   const [isError, setIsError] = useState(null);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+    });
+  }, []);
 
   const handleChange = (event) => {
     setLoginData((previousData) => {
@@ -40,28 +51,31 @@ const LoginPage = () => {
       const docRef = doc(db, "userData", userID);
       const responseWithSingleUser = await getDoc(docRef);
 
-            if (!responseWithSingleUser.exists()) {
-                console.error("Unable to get user details for " + userID);
-                return;
-            }
-            const singleUserData = responseWithSingleUser.data();
-            router.push("/");
-            
-        } catch (error) {
-            setIsError("Incorrect user details, please try again.")        }
-    };
+      if (!responseWithSingleUser.exists()) {
+        console.error("Unable to get user details for " + userID);
+        return;
+      }
+      const singleUserData = responseWithSingleUser.data();
+      router.push("/");
+    } catch (error) {
+      setIsError("Incorrect user details, please try again.");
+    }
+  };
 
   return (
     <div className="landing__page max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      {user && router.push("/")}
+      {!user && (
       <form
         onSubmit={handleSubmit}
         className="border px-6 py-8 rounded shadow-md text-white w-full"
       >
         <h1 className="mb-6 text-3xl text-center">Login</h1>
-        {isError && 
+        {isError && (
           <div className='bg-red-100 border mb-5 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" text-center'>
-            <span className='font-bold'>{isError}</span>
-          </div>}
+            <span className="font-bold">{isError}</span>
+          </div>
+        )}
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -94,6 +108,8 @@ const LoginPage = () => {
           </Link>
         </div>
       </form>
+
+      )}
     </div>
   );
 };
