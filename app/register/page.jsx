@@ -79,6 +79,7 @@ const RegisterPage = () => {
 
   return (
     <div className="landing__page max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      {user && router.push('/')}
       <form onSubmit={handleSubmit} className="border px-6 py-8 rounded shadow-md text-white w-full">
         <h1 className="mb-6 text-3xl text-center">Register</h1>
         {error && (
