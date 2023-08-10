@@ -2,6 +2,7 @@
 import { useEffect, useState, useContext } from "react";
 import React from "react";
 import AltImage from "@/public/images/alt-image.png"
+import Image from "next/image";
 
 import {
   doc,
