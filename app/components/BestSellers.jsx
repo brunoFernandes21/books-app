@@ -626,7 +626,7 @@ export const BestSellers = () => {
 
   return (
     <div className="book-title mt-10 flex justify-center flex-col items-center pt-4 p-2 bg-white text-slate-800 rounded-2xl">
-      <h3 className="text-2xl">New York Times Best Sellers</h3>
+      <h3 className="text-2xl text-center">New York Times Best Sellers</h3>
       <div className="flex justify-start flex-row gap-4 p-4 overflow-x-scroll w-full">
         {bestSellersNYT.map((book) => {
           return <BestSellerCard book={book} key={book.id} />;
