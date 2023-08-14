@@ -18,8 +18,8 @@ const LoginPage = () => {
   let router = useRouter();
   const [isError, setIsError] = useState(null);
   const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
+    email: "anna@gmail.com",
+    password: "123456",
   });
 
   useEffect(() => {
@@ -38,6 +38,8 @@ const LoginPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(loginData)
+
     setIsError(null);
     try {
       const responseFromLogin = await signInWithEmailAndPassword(
@@ -61,6 +63,7 @@ const LoginPage = () => {
       setIsError("Incorrect user details, please try again.");
     }
   };
+
 
   return (
     <div className="landing__page max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -88,7 +91,7 @@ const LoginPage = () => {
         />
         <label htmlFor="password">Password</label>
         <input
-          type="password"
+          type="text"
           className="block border border-grey-light w-full text-black p-3 rounded-full mb-4"
           name="password"
           value={loginData.password}

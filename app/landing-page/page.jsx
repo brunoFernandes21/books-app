@@ -47,6 +47,12 @@ const LandingPage = () => {
             Login
           </Link>
           <Link
+            href="/login"
+            className="bg-blue-800 p-2 font-bold rounded text-white px-6 hover:bg-red-400"
+          >
+            Login With test
+          </Link>
+          <Link
             href="/register"
             className="bg-blue-800 p-2 font-bold rounded text-white hover:bg-blue-400"
           >
